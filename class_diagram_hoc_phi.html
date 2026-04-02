@@ -1,0 +1,151 @@
+
+<style>
+#cd { padding: 1rem 0; overflow-x: auto; }
+</style>
+<div id="cd"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    classText: dark ? '#c2c0b6' : '#3d3d3a',
+  },
+});
+const src = `classDiagram
+    class NguoiDung {
+        +String maNguoiDung
+        +String tenDangNhap
+        #String matKhau
+        +String hoTen
+        +String email
+        +String vaiTro
+        +bool trangThai
+        +dangNhap() bool
+        +dangXuat() void
+        +doiMatKhau() void
+    }
+    class QuanTriVien {
+        +quanLySinhVien() void
+        +quanLyHocPhi() void
+        +xemBaoCao() void
+        +phanQuyen() void
+    }
+    class NhanVienThuNgan {
+        +thuHocPhi() void
+        +taoHoaDon() HoaDonHocPhi
+        +xemDanhSachNo() List
+        +xacNhanThanhToan() void
+    }
+    class SinhVien {
+        +String maSV
+        +String hoTen
+        +Date ngaySinh
+        +bool gioiTinh
+        +String email
+        +String soDienThoai
+        +String trangThai
+        +xemHoaDon() List
+        +xemLichSuThanhToan() List
+        +tinhNoHocPhi() double
+    }
+    class Lop {
+        +String maLop
+        +String tenLop
+        +int nienKhoa
+        +danhSachSinhVien() List
+    }
+    class Nganh {
+        +String maNganh
+        +String tenNganh
+    }
+    class Khoa {
+        +String maKhoa
+        +String tenKhoa
+        +String truongKhoa
+    }
+    class MonHoc {
+        +String maMH
+        +String tenMH
+        +int soTinChi
+        +tinhHocPhiMH(maHocKy) double
+    }
+    class HocKy {
+        +String maHocKy
+        +String tenHocKy
+        +int hocKySo
+        +Date ngayBatDau
+        +Date ngayKetThuc
+        +String maNamHoc
+        +kiemTraHanHocPhi() bool
+    }
+    class MucHocPhi {
+        +int maMucHP
+        +double giaPerTinChi
+        +String loaiSinhVien
+        +tinhMucPhi(soTC) double
+    }
+    class MienGiam {
+        +int maMienGiam
+        +String tenLoai
+        +double phanTramGiam
+        +double soTienGiam
+        +tinhTienGiam() double
+        +apDungMienGiam() void
+    }
+    class HoaDonHocPhi {
+        +String maHoaDon
+        +double tongTien
+        +double soTienMienGiam
+        +double soTienPhaiTra
+        +Date ngayTaoHD
+        +Date hanThanhToan
+        +String trangThai
+        +tinhTongTien() double
+        +guiThongBao() void
+        +kiemTraHanThanhToan() bool
+    }
+    class ThanhToan {
+        +String maThanhToan
+        +double soTienTT
+        +DateTime ngayThanhToan
+        +String phuongThucTT
+        +String ghiChu
+        +thucHienThanhToan() bool
+        +xacNhanThanhToan() void
+        +hoanTien() bool
+    }
+    class DangKyHoc {
+        +int maDangKy
+        +Date ngayDangKy
+        +String trangThai
+        +dangKy() bool
+        +huyDangKy() bool
+    }
+
+    NguoiDung <|-- QuanTriVien
+    NguoiDung <|-- NhanVienThuNgan
+    SinhVien "n" --o "1" Lop : thuoc
+    Lop "n" --o "1" Nganh : thuoc
+    Nganh "n" --o "1" Khoa : thuoc
+    SinhVien "1" --* "n" DangKyHoc : dangKy
+    MonHoc "1" --* "n" DangKyHoc : trong
+    HocKy "1" --* "n" DangKyHoc : trong
+    SinhVien "1" --* "n" HoaDonHocPhi : co
+    HocKy "1" --* "n" HoaDonHocPhi : trong
+    HoaDonHocPhi "1" --* "n" ThanhToan : co
+    SinhVien "1" --o "n" MienGiam : duocHuong
+    MonHoc "1" --* "n" MucHocPhi : co
+    HocKy "1" --* "n" MucHocPhi : trong
+    NhanVienThuNgan "1" ..> "n" ThanhToan : thucHien`;
+const { svg } = await mermaid.render('cd-svg', src);
+document.getElementById('cd').innerHTML = svg;
+</script>
