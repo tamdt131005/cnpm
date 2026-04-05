@@ -10,6 +10,15 @@ class NguoiDungDAO {
     return rows[0] || null;
   }
 
+  async loginUser(tenDangNhap, matKhau) {
+    const [rows] = await pool.execute(
+      'SELECT maNguoiDung, vaiTro FROM NGUOIDUNG WHERE tenDangNhap = ? AND matKhau = ?',
+      [tenDangNhap, matKhau]
+    );
+    return rows[0] || null;
+  }
+
+//
   // Tìm người dùng theo mã
   async findById(maNguoiDung) {
     const [rows] = await pool.execute(
@@ -22,7 +31,7 @@ class NguoiDungDAO {
   // Lấy danh sách tất cả người dùng (không trả mật khẩu)
   async findAll() {
     const [rows] = await pool.execute(
-      'SELECT maNguoiDung, tenDangNhap, hoTen, email, soDienThoai, vaiTro, trangThai, ngayTao FROM NGUOIDUNG ORDER BY ngayTao DESC'
+      'SELECT maNguoiDung, tenDangNhap, hoTen, email, soDienThoai, vaiTro, ngayTao FROM NGUOIDUNG ORDER BY ngayTao DESC'
     );
     return rows;
   }
@@ -58,15 +67,6 @@ class NguoiDungDAO {
     const [result] = await pool.execute(
       'UPDATE NGUOIDUNG SET matKhau = ? WHERE maNguoiDung = ?',
       [hashedPassword, maNguoiDung]
-    );
-    return result;
-  }
-
-  // Cập nhật trạng thái (khóa/mở khóa)
-  async updateStatus(maNguoiDung, trangThai) {
-    const [result] = await pool.execute(
-      'UPDATE NGUOIDUNG SET trangThai = ? WHERE maNguoiDung = ?',
-      [trangThai, maNguoiDung]
     );
     return result;
   }

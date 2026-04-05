@@ -1,6 +1,6 @@
 import Joi from 'joi';
-
-export const createSchema = Joi.object({
+import { validateRequest } from '../middleware/validate.middleware.js';
+const createSchema = Joi.object({
   maNguoiDung: Joi.string().max(50).required().messages({
     'any.required': 'Mã người dùng là bắt buộc',
     'string.max': 'Mã người dùng tối đa 50 ký tự'
@@ -22,15 +22,12 @@ export const createSchema = Joi.object({
   })
 });
 
-export const updateSchema = Joi.object({
+const updateSchema = Joi.object({
   hoTen: Joi.string().max(100).optional(),
   email: Joi.string().email().max(100).optional(),
   soDienThoai: Joi.string().max(20).optional(),
   vaiTro: Joi.string().valid('Admin', 'KeToan', 'SinhVien').optional()
 });
 
-export const updateStatusSchema = Joi.object({
-  trangThai: Joi.boolean().required().messages({
-    'any.required': 'Trạng thái là bắt buộc'
-  })
-});
+export const taoNguoiDung = validateRequest(createSchema);
+export const capNhatNguoiDung = validateRequest(updateSchema);

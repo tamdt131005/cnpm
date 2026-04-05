@@ -2,8 +2,11 @@ import bcrypt from 'bcryptjs';
 import nguoiDungDAO from '../daos/nguoidung.dao.js';
 
 class NguoiDungService {
-  async getAll() {
-    return await nguoiDungDAO.findAll();
+  async getAll(vaiTro) {
+    if(vaiTro == "Admin"){
+      return await nguoiDungDAO.findAll();
+    }
+    throw error;
   }
 
   async getById(maNguoiDung) {

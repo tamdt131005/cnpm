@@ -4,7 +4,8 @@ class NguoiDungController {
   // GET /api/v1/nguoidung
   async getAll(req, res, next) {
     try {
-      const data = await nguoiDungService.getAll();
+      const vaiTro = req.query.vaiTro;
+      const data = await nguoiDungService.getAll(vaiTro);
       res.json({ success: true, data });
     } catch (error) {
       next(error);

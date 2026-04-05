@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { testConnection } from './src/config/db.js';
 import routes from './src/routes/index.js';
-import { errorHandler } from './src/middleware/error.middleware.js';
 
 dotenv.config();
 
@@ -18,7 +17,7 @@ app.use(express.json());                    // Parse JSON body
 app.use(express.urlencoded({ extended: true })); // Parse form data
 
 // ===== ROUTES =====
-app.use('/api/v1', routes);
+app.use('/api/', routes);
 
 // Route kiểm tra server hoạt động
 app.get('/', (req, res) => {
@@ -28,9 +27,6 @@ app.get('/', (req, res) => {
     version: '1.0.0'
   });
 });
-
-// ===== ERROR HANDLER (đặt cuối cùng) =====
-app.use(errorHandler);
 
 // ===== KHỞI ĐỘNG SERVER =====
 const startServer = async () => {
