@@ -1,0 +1,32 @@
+.invoice-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#invoice-body .btn {
+    min-width: 110px;
+    text-align: center;
+}
+
+.payment-form-card {
+    margin-top: 8px;
+}
+
+.payment-modal-hint {
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+    .invoice-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    #invoice-body .btn {
+        min-width: 94px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}

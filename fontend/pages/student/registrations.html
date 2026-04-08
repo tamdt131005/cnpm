@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon hoc dang ky</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./registrations.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <student-sidebar></student-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Mon hoc dang ky" subtitle="Loc theo hoc ky de theo doi hoc phi du kien"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Sinh vien / Mon hoc dang ky</p>
+                <div class="registration-actions">
+                    <a class="btn btn-ghost" href="./overview.html">Tong quan</a>
+                    <a class="btn btn-ghost" href="./invoices.html">Hoa don hoc phi</a>
+                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head registration-head">
+                    <h3>Bo loc dang ky</h3>
+                    <div class="registration-tools">
+                        <input id="reg-ma-hoc-ky" class="input" placeholder="Loc ma hoc ky (vi du: HK1_2025)" />
+                        <select id="reg-loai-sv" class="select">
+                            <option value="ChinhQuy">Chinh quy</option>
+                            <option value="LienThong">Lien thong</option>
+                            <option value="VanBang2">Van bang 2</option>
+                        </select>
+                        <button id="reg-load" class="btn btn-primary" type="button">Tai danh sach</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tong mon da dang ky</p>
+                    <h3 id="reg-stat-total-course">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tong tin chi</p>
+                    <h3 id="reg-stat-total-credit">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Hoc phi du kien</p>
+                    <h3 id="reg-stat-total-fee">0 VND</h3>
+                </article>
+                <article class="stat-card">
+                    <p>So hoc ky xuat hien</p>
+                    <h3 id="reg-stat-semester">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Chi tiet mon hoc da dang ky</h3>
+                    <span class="muted">Du lieu cap nhat theo bo loc hien tai</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ma dang ky</th>
+                                <th>Ma mon hoc</th>
+                                <th>Ten mon hoc</th>
+                                <th>Hoc ky</th>
+                                <th>Tin chi</th>
+                                <th>Gia tin chi</th>
+                                <th>Hoc phi du kien</th>
+                                <th>Trang thai</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registration-body">
+                            <tr>
+                                <td colspan="8" class="empty">Dang tai danh sach dang ky...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./registrations.js"></script>
+</body>
+
+</html>

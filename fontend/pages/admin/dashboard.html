@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Admin dashboard" subtitle="Tong quan van hanh va dieu huong theo tung chuc nang"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Admin / Dashboard</p>
+                <div class="admin-dashboard-actions">
+                    <a class="btn btn-ghost" href="./users-create.html">Tao tai khoan</a>
+                    <a class="btn btn-ghost" href="./users-manage.html">Quan ly tai khoan</a>
+                    <a class="btn btn-ghost" href="./catalog-hub.html">Danh muc dao tao</a>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tong tai khoan</p>
+                    <h3 id="stat-total-users">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Sinh vien</p>
+                    <h3 id="stat-total-students">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Khoa</p>
+                    <h3 id="stat-total-departments">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Dot thu hien hoat</p>
+                    <h3 id="stat-active-rates">0</h3>
+                </article>
+            </section>
+
+            <section class="section">
+                <div class="quick-grid">
+                    <article class="quick-card">
+                        <h4>Tao tai khoan moi</h4>
+                        <p>Khoi tao tai khoan theo vai tro Admin, KeToan, SinhVien nhanh gon.</p>
+                        <a class="btn btn-primary" href="./users-create.html">Mo trang tao tai khoan</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Quan ly quyen va trang thai</h4>
+                        <p>Sua thong tin, doi mat khau va khoa/mo khoa theo nguoi dung.</p>
+                        <a class="btn btn-accent" href="./users-manage.html">Mo trang quan ly</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Danh muc dao tao</h4>
+                        <p>Truy cap nhanh tung nhom danh muc va man hinh cap nhat chi tiet.</p>
+                        <a class="btn btn-ghost" href="./catalog-hub.html">Mo hub danh muc</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Bao cao tai chinh</h4>
+                        <p>Xem cong no, tao hoa don va xuat bao cao tong hop theo don vi.</p>
+                        <a class="btn btn-ghost" href="../staff/report.html">Mo bao cao</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Dinh muc hoc phi</h4>
+                        <p>Cap nhat gia tin chi theo hoc ky va loai sinh vien tai mot man hinh rieng.</p>
+                        <a class="btn btn-ghost" href="../staff/rates.html">Mo dinh muc</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Danh muc chi tiet</h4>
+                        <p>Can thao tac truc tiep tung ban ghi? vao man hinh danh muc tong hop.</p>
+                        <a class="btn btn-ghost" href="./catalog.html">Mo danh muc chi tiet</a>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý mức học phí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./rates.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <staff-sidebar></staff-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Quản lý mức học phí" subtitle="Thiết lập giá tín chỉ theo học kỳ"></app-topbar>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tổng định mức</p>
+                    <h3 id="rate-total">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Học kỳ hiện có</p>
+                    <h3 id="rate-semester">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Môn học được cấu hình</p>
+                    <h3 id="rate-subject">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Loại SV áp dụng</p>
+                    <h3 id="rate-type">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Tạo định mức học phí mới</h3>
+                </div>
+
+                <div class="form-card">
+                    <div class="form-header">
+                        <h4>Thông tin định mức</h4>
+                    </div>
+                    <form id="rate-form">
+                        <div class="form-body">
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="maMH">Mã môn học</label>
+                                    <input id="maMH" name="maMH" class="input" placeholder="VD: CTDLGT" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="maHocKy">Mã học kỳ</label>
+                                    <input id="maHocKy" name="maHocKy" class="input" placeholder="VD: HK1_2025" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="giaPerTinChi">Giá mỗi tín chỉ (VND)</label>
+                                    <input id="giaPerTinChi" name="giaPerTinChi" class="input" type="number" min="1000" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="loaiSinhVien">Loại sinh viên</label>
+                                    <select id="loaiSinhVien" name="loaiSinhVien" class="select">
+                                        <option value="ChinhQuy">Chính quy</option>
+                                        <option value="LienThong">Liên thông</option>
+                                        <option value="VanBang2">Văn bằng 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button id="rate-submit" class="btn btn-primary" type="submit">Lưu định mức</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Danh sách định mức học phí</h3>
+                    <a class="btn btn-ghost" href="./report.html">Mở báo cáo công nợ</a>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã mức HP</th>
+                                <th>Mã môn</th>
+                                <th>Tên môn</th>
+                                <th>Mã học kỳ</th>
+                                <th>Tên học kỳ</th>
+                                <th>Loại SV</th>
+                                <th>Giá/tín chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rate-body">
+                            <tr>
+                                <td colspan="7" class="empty">Đang tải dữ liệu định mức...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./rates.js"></script>
+</body>
+
+</html>

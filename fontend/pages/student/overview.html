@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tong quan sinh vien</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./overview.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <student-sidebar></student-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Tong quan sinh vien" subtitle="Buc tranh nhanh hoc phi va cong no ca nhan"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Sinh vien / Tong quan</p>
+                <div class="overview-actions">
+                    <a class="btn btn-ghost" href="./invoices.html">Hoa don hoc phi</a>
+                    <a class="btn btn-ghost" href="./registrations.html">Mon hoc dang ky</a>
+                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                </div>
+            </section>
+
+            <section class="card overview-hero">
+                <div class="overview-hero-copy">
+                    <span class="kicker">Student Finance Hub</span>
+                    <h3 id="profile-greeting">Xin chao, sinh vien</h3>
+                    <p>
+                        Theo doi cong no hoc phi theo phong cach dashboard gon gon, xu ly nhanh nhung khoan can thanh toan va dieu huong
+                        den tung chuc nang chi tiet.
+                    </p>
+                </div>
+                <div class="overview-hero-meta">
+                    <article class="overview-meta-item">
+                        <p>Trang thai tai khoan</p>
+                        <h4 id="profile-status-text">Dang tai...</h4>
+                    </article>
+                    <article class="overview-meta-item">
+                        <p>Han thanh toan gan nhat</p>
+                        <h4 id="stat-nearest-due">-</h4>
+                    </article>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tong so hoa don</p>
+                    <h3 id="stat-total-invoice">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Hoa don con no</p>
+                    <h3 id="stat-debt">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tong cong no</p>
+                    <h3 id="stat-debt-amount">0 VND</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tong da nop</p>
+                    <h3 id="stat-paid-amount">0 VND</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Hoa don qua han</p>
+                    <h3 id="stat-overdue">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Ho so sinh vien</h3>
+                    <span id="profile-status" class="badge warn">Dang tai du lieu</span>
+                </div>
+
+                <div class="profile-grid">
+                    <article class="profile-item">
+                        <p>Ma sinh vien</p>
+                        <h4 id="profile-ma-sv">-</h4>
+                    </article>
+                    <article class="profile-item">
+                        <p>Ho va ten</p>
+                        <h4 id="profile-ho-ten">-</h4>
+                    </article>
+                    <article class="profile-item">
+                        <p>Email</p>
+                        <h4 id="profile-email">-</h4>
+                    </article>
+                    <article class="profile-item">
+                        <p>Loai sinh vien</p>
+                        <h4 id="profile-loai">-</h4>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="quick-grid">
+                    <article class="quick-card">
+                        <h4>Quan ly hoa don</h4>
+                        <p>Xem danh sach hoa don, cong no va thanh toan MoMo theo tung khoan can xu ly.</p>
+                        <a class="btn btn-primary" href="./invoices.html">Mo trang hoa don</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Mon hoc dang ky</h4>
+                        <p>Loc theo hoc ky, loai sinh vien va kiem tra hoc phi du kien theo tung mon hoc.</p>
+                        <a class="btn btn-accent" href="./registrations.html">Mo trang dang ky</a>
+                    </article>
+                    <article class="quick-card">
+                        <h4>Lich su giao dich</h4>
+                        <p>Tra cuu cac lan thanh toan da phat sinh va thong tin giao dich gan day.</p>
+                        <a class="btn btn-ghost" href="./history.html">Xem lich su</a>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./overview.js"></script>
+</body>
+
+</html>

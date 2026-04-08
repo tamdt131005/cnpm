@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kết quả thanh toán MoMo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./payment-result.css" />
+</head>
+
+<body>
+    <div class="login-wrap">
+        <section class="card payment-result-card">
+            <span class="kicker">Phản hồi MoMo</span>
+            <h1 id="result-title" class="payment-result-title">Đang kiểm tra kết quả thanh toán...</h1>
+            <p id="result-hint" class="muted">Hệ thống đang đọc tham số trả về từ MoMo.</p>
+
+            <div class="table-wrap payment-result-table-wrap">
+                <table class="table payment-result-table">
+                    <tbody>
+                        <tr>
+                            <th class="payment-result-label">Mã đơn hàng</th>
+                            <td id="view-order-id">-</td>
+                        </tr>
+                        <tr>
+                            <th>Mã kết quả</th>
+                            <td id="view-result-code">-</td>
+                        </tr>
+                        <tr>
+                            <th>Thông báo</th>
+                            <td id="view-message">-</td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái thành công</th>
+                            <td id="view-success">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <h3 class="payment-result-subtitle">Payload chuẩn hóa</h3>
+                <pre id="result-json" class="payment-result-json"></pre>
+            </div>
+
+            <div class="payment-result-actions">
+                <a class="btn btn-primary" href="./overview.html">Về trang tổng quan</a>
+                <a class="btn btn-ghost" href="./invoices.html">Xem hóa đơn học phí</a>
+                <a class="btn btn-ghost" href="./history.html">Xem lịch sử thanh toán</a>
+                <a class="btn btn-ghost" href="../../index.html">Trang chủ</a>
+            </div>
+        </section>
+    </div>
+
+    <script src="./payment-result.js"></script>
+</body>
+
+</html>

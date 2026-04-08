@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Báo cáo công nợ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./report.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <staff-sidebar></staff-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Báo cáo tài vụ" subtitle="Phát sinh hóa đơn, ghi nhận thu và xuất báo cáo"></app-topbar>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Số hóa đơn đang nợ</p>
+                    <h3 id="debt-count">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tổng tiền còn nợ</p>
+                    <h3 id="debt-total">0 ₫</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Khoản nợ quá hạn</p>
+                    <h3 id="debt-overdue">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Lớp có nợ nhiều nhất</p>
+                    <h3 id="debt-top-class">-</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Phát sinh hóa đơn theo học kỳ</h3>
+                </div>
+
+                <div class="form-card">
+                    <div class="form-header">
+                        <h4>Thông tin phát sinh hóa đơn</h4>
+                    </div>
+
+                    <form id="invoice-form">
+                        <div class="form-body">
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="maHocKy">Mã học kỳ</label>
+                                    <input id="maHocKy" name="maHocKy" class="input" placeholder="VD: HK1_2025" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="hanThanhToan">Hạn thanh toán</label>
+                                    <input id="hanThanhToan" name="hanThanhToan" class="input" type="date" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="loaiSinhVien">Loại sinh viên</label>
+                                    <select id="loaiSinhVien" name="loaiSinhVien" class="select">
+                                        <option value="ChinhQuy">Chính quy</option>
+                                        <option value="LienThong">Liên thông</option>
+                                        <option value="VanBang2">Văn bằng 2</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="soTienMienGiamMacDinh">Miễn giảm mặc định (VND)</label>
+                                    <input id="soTienMienGiamMacDinh" name="soTienMienGiamMacDinh" class="input" type="number" min="0" value="0" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button id="invoice-submit" class="btn btn-accent" type="submit">Tạo hóa đơn</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head report-head-wrap">
+                    <h3>Danh sách đăng ký môn học theo kỳ</h3>
+                    <form id="registration-filter-form" class="report-inline-form report-inline-form-compact">
+                        <input id="registration-maHocKy" class="input" placeholder="Lọc theo mã học kỳ" />
+                        <select id="registration-loaiSinhVien" class="select">
+                            <option value="ChinhQuy">Chính quy</option>
+                            <option value="LienThong">Liên thông</option>
+                            <option value="VanBang2">Văn bằng 2</option>
+                        </select>
+                        <button class="btn btn-primary" type="submit">Tải đăng ký</button>
+                    </form>
+                </div>
+
+                <div class="summary-grid registration-summary-grid">
+                    <article class="summary-item">
+                        <p>Tổng lượt đăng ký</p>
+                        <h4 id="registration-total-count">0</h4>
+                    </article>
+                    <article class="summary-item">
+                        <p>Tổng học phí dự kiến</p>
+                        <h4 id="registration-total-fee">0 ₫</h4>
+                    </article>
+                    <article class="summary-item">
+                        <p>Loại sinh viên</p>
+                        <h4 id="registration-student-type">Chính quy</h4>
+                    </article>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã ĐK</th>
+                                <th>Mã SV</th>
+                                <th>Họ tên</th>
+                                <th>Lớp</th>
+                                <th>Mã MH</th>
+                                <th>Tên môn</th>
+                                <th>Học kỳ</th>
+                                <th>Tín chỉ</th>
+                                <th>Giá/tín chỉ</th>
+                                <th>Học phí dự kiến</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registration-body">
+                            <tr>
+                                <td colspan="11" class="empty">Đang tải danh sách đăng ký học...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head report-head-wrap">
+                    <h3>Quản lý hóa đơn và miễn giảm</h3>
+                    <form id="invoice-filter-form" class="report-inline-form">
+                        <input id="filter-maHocKy" class="input" placeholder="Lọc theo mã học kỳ" />
+                        <input id="filter-maSV" class="input" placeholder="Lọc theo mã sinh viên" />
+                        <select id="filter-trangThaiNo" class="select">
+                            <option value="">Tất cả trạng thái nợ</option>
+                            <option value="ConNo">Còn nợ</option>
+                            <option value="DaThanhToan">Đã thanh toán</option>
+                        </select>
+                        <button class="btn btn-primary" type="submit">Lọc hóa đơn</button>
+                        <button id="clear-invoice-filter" class="btn btn-ghost" type="button">Xóa lọc</button>
+                    </form>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <th>Mã SV</th>
+                                <th>Họ tên</th>
+                                <th>Học kỳ</th>
+                                <th>Tổng tiền</th>
+                                <th>Miễn giảm</th>
+                                <th>Phải trả</th>
+                                <th>Đã nộp</th>
+                                <th>Còn nợ</th>
+                                <th>Hạn thanh toán</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-manage-body">
+                            <tr>
+                                <td colspan="12" class="empty">Đang tải danh sách hóa đơn...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section card report-grid-two">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h4>Ghi nhận thanh toán thủ công</h4>
+                    </div>
+
+                    <form id="manual-payment-form">
+                        <div class="form-body">
+                            <div class="form-grid form-grid-two">
+                                <div class="form-field">
+                                    <label for="pay-maHoaDon">Mã hóa đơn</label>
+                                    <input id="pay-maHoaDon" name="maHoaDon" class="input" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="pay-soTienTT">Số tiền thanh toán</label>
+                                    <input id="pay-soTienTT" name="soTienTT" class="input" type="number" min="1" required />
+                                </div>
+                                <div class="form-field">
+                                    <label for="pay-phuongThucTT">Phương thức</label>
+                                    <select id="pay-phuongThucTT" name="phuongThucTT" class="select">
+                                        <option value="TienMat">Tiền mặt</option>
+                                        <option value="ChuyenKhoan">Chuyển khoản</option>
+                                        <option value="The">Thẻ</option>
+                                        <option value="ViDienTu">Ví điện tử</option>
+                                    </select>
+                                </div>
+                                <div class="form-field field-full">
+                                    <label for="pay-ghiChu">Ghi chú</label>
+                                    <textarea id="pay-ghiChu" name="ghiChu" class="textarea" placeholder="Tùy chọn"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button id="payment-submit" class="btn btn-primary" type="submit">Ghi nhận thanh toán</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <div class="section-head compact-head">
+                        <h3>Lịch sử thu gần đây</h3>
+                        <button id="reload-payments" class="btn btn-ghost" type="button">Tải lại</button>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã giao dịch</th>
+                                    <th>Mã hóa đơn</th>
+                                    <th>Mã SV</th>
+                                    <th>Học kỳ</th>
+                                    <th>Số tiền</th>
+                                    <th>Phương thức</th>
+                                    <th>Ngày thu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payment-history-body">
+                                <tr>
+                                    <td colspan="7" class="empty">Đang tải lịch sử thanh toán...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head report-head-wrap">
+                    <h3>Tổng hợp báo cáo và xuất dữ liệu</h3>
+                    <div class="report-inline-form">
+                        <input id="summary-maNamHoc" class="input" placeholder="Lọc theo mã năm học" />
+                        <button id="summary-load" class="btn btn-primary" type="button">Tải tổng hợp</button>
+                        <button class="btn btn-ghost" type="button" data-export="summary:excel">Xuất tổng hợp CSV</button>
+                        <button class="btn btn-ghost" type="button" data-export="summary:pdf">Xuất tổng hợp HTML</button>
+                        <button class="btn btn-ghost" type="button" data-export="debts:excel">Xuất công nợ CSV</button>
+                        <button class="btn btn-ghost" type="button" data-export="org:excel">Xuất nợ theo đơn vị</button>
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+                    <article class="summary-item">
+                        <p>Tổng tiền đã thu</p>
+                        <h4 id="summary-total-revenue">0 ₫</h4>
+                    </article>
+                    <article class="summary-item">
+                        <p>Tổng giao dịch</p>
+                        <h4 id="summary-total-transactions">0</h4>
+                    </article>
+                    <article class="summary-item">
+                        <p>Tổng hóa đơn đã có thanh toán</p>
+                        <h4 id="summary-total-invoices">0</h4>
+                    </article>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã năm học</th>
+                                <th>Mã học kỳ</th>
+                                <th>Số giao dịch</th>
+                                <th>Số hóa đơn</th>
+                                <th>Tổng thu</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summary-body">
+                            <tr>
+                                <td colspan="5" class="empty">Đang tải tổng hợp doanh thu...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="org-grid">
+                    <div class="org-card">
+                        <h4>Công nợ theo khoa</h4>
+                        <div class="table-wrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã khoa</th>
+                                        <th>Tổng nợ</th>
+                                        <th>Số hóa đơn nợ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="org-khoa-body">
+                                    <tr>
+                                        <td colspan="3" class="empty">Đang tải...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="org-card">
+                        <h4>Công nợ theo ngành</h4>
+                        <div class="table-wrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã ngành</th>
+                                        <th>Tổng nợ</th>
+                                        <th>Số hóa đơn nợ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="org-nganh-body">
+                                    <tr>
+                                        <td colspan="3" class="empty">Đang tải...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="org-card">
+                        <h4>Công nợ theo lớp</h4>
+                        <div class="table-wrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã lớp</th>
+                                        <th>Tổng nợ</th>
+                                        <th>Số hóa đơn nợ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="org-lop-body">
+                                    <tr>
+                                        <td colspan="3" class="empty">Đang tải...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Danh sách công nợ chi tiết</h3>
+                    <a class="btn btn-ghost" href="./rates.html">Quay lại định mức học phí</a>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã SV</th>
+                                <th>Họ tên</th>
+                                <th>Lớp</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Học kỳ</th>
+                                <th>Phải trả</th>
+                                <th>Đã nộp</th>
+                                <th>Còn nợ</th>
+                                <th>Hạn thanh toán</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="debt-body">
+                            <tr>
+                                <td colspan="10" class="empty">Đang tải dữ liệu công nợ...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./report.js"></script>
+</body>
+
+</html>

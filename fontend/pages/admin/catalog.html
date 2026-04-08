@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý danh mục</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./catalog.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Quản lý danh mục" subtitle="Cấu hình dữ liệu khoa ngành lớp môn học và niên khóa"></app-topbar>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tổng người dùng</p>
+                    <h3 id="stat-total-users">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Sinh viên</p>
+                    <h3 id="stat-total-students">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Khoa</p>
+                    <h3 id="stat-total-departments">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Đợt thu hiện hoạt</p>
+                    <h3 id="stat-active-rates">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head catalog-head-tools">
+                    <h3>Dữ liệu danh mục</h3>
+                    <div class="catalog-tools">
+                        <a class="btn btn-ghost" href="./catalog-hub.html">Hub danh mục</a>
+                        <select id="resource-select" class="select">
+                            <option value="khoa">Khoa</option>
+                            <option value="nganh">Ngành</option>
+                            <option value="lop">Lớp</option>
+                            <option value="monhoc">Môn học</option>
+                            <option value="sinhvien">Sinh viên</option>
+                            <option value="namhoc">Năm học</option>
+                            <option value="hocky">Học kỳ</option>
+                        </select>
+                        <button id="reload-catalog" type="button" class="btn btn-ghost">Tải lại</button>
+                    </div>
+                </div>
+
+                <form id="catalog-form" class="catalog-form-grid">
+                    <div id="catalog-form-fields" class="catalog-form-fields"></div>
+                    <div class="catalog-form-actions">
+                        <button id="catalog-submit" type="submit" class="btn btn-primary">Thêm mới</button>
+                        <button id="catalog-cancel" type="button" class="btn btn-ghost" hidden>Hủy sửa</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="section card">
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead id="catalog-head-row"></thead>
+                        <tbody id="catalog-body">
+                            <tr>
+                                <td class="empty">Đang tải dữ liệu...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./catalog.js"></script>
+</body>
+
+</html>

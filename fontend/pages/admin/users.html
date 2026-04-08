@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý tài khoản</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./users.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Quản lý tài khoản" subtitle="Thêm sửa khóa tài khoản và phân quyền hệ thống"></app-topbar>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tổng tài khoản</p>
+                    <h3 id="user-stat-total">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Admin</p>
+                    <h3 id="user-stat-admin">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Kế toán</p>
+                    <h3 id="user-stat-staff">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tài khoản đang khóa</p>
+                    <h3 id="user-stat-locked">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Tạo tài khoản mới</h3>
+                </div>
+
+                <form id="user-form" class="user-form-grid">
+                    <div class="form-field">
+                        <label for="maNguoiDung">Mã người dùng</label>
+                        <input id="maNguoiDung" name="maNguoiDung" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="tenDangNhap">Tên đăng nhập</label>
+                        <input id="tenDangNhap" name="tenDangNhap" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="matKhau">Mật khẩu</label>
+                        <input id="matKhau" name="matKhau" type="password" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="hoTen">Họ tên</label>
+                        <input id="hoTen" name="hoTen" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="soDienThoai">Số điện thoại</label>
+                        <input id="soDienThoai" name="soDienThoai" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="vaiTro">Vai trò</label>
+                        <select id="vaiTro" name="vaiTro" class="select">
+                            <option value="SinhVien">Sinh viên</option>
+                            <option value="KeToan">Kế toán</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="user-form-actions">
+                        <button id="user-submit" type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="section card">
+                <div class="section-head user-section-head">
+                    <h3>Danh sách tài khoản</h3>
+                    <div class="user-tools">
+                        <select id="user-role-filter" class="select">
+                            <option value="">Tất cả vai trò</option>
+                            <option value="Admin">Admin</option>
+                            <option value="KeToan">Kế toán</option>
+                            <option value="SinhVien">Sinh viên</option>
+                        </select>
+                        <button id="reload-users" class="btn btn-ghost" type="button">Tải lại</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-body">
+                            <tr>
+                                <td colspan="7" class="empty">Đang tải danh sách tài khoản...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./users.js"></script>
+</body>
+
+</html>

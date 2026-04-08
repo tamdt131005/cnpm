@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub danh muc</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./catalog-hub.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Hub danh muc" subtitle="Chia nho danh muc dao tao theo nhom nghiep vu"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Admin / Danh muc / Hub</p>
+                <div class="catalog-hub-actions">
+                    <a class="btn btn-ghost" href="./dashboard.html">Dashboard</a>
+                    <a class="btn btn-ghost" href="./catalog.html">Man hinh chi tiet tong hop</a>
+                </div>
+            </section>
+
+            <section class="catalog-grid">
+                <article class="catalog-card">
+                    <span class="kicker">Dao tao co so</span>
+                    <h4>Khoa</h4>
+                    <p>Quan ly ma khoa, ten khoa va truong khoa theo cau truc to chuc.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=khoa</p>
+                    <a class="btn btn-primary" href="./catalog.html?resource=khoa">Mo danh muc Khoa</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Dao tao co so</span>
+                    <h4>Nganh</h4>
+                    <p>Danh muc nganh dao tao gan voi khoa, phuc vu phan bo lop va mon hoc.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=nganh</p>
+                    <a class="btn btn-primary" href="./catalog.html?resource=nganh">Mo danh muc Nganh</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Dao tao co so</span>
+                    <h4>Lop</h4>
+                    <p>Quan ly lop hoc theo nien khoa va nganh de lien ket sinh vien.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=lop</p>
+                    <a class="btn btn-primary" href="./catalog.html?resource=lop">Mo danh muc Lop</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Mon hoc</span>
+                    <h4>Mon hoc</h4>
+                    <p>Cap nhat ma mon, ten mon, so tin chi va khoa quan ly mon hoc.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=monhoc</p>
+                    <a class="btn btn-accent" href="./catalog.html?resource=monhoc">Mo danh muc Mon hoc</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Nguoi hoc</span>
+                    <h4>Sinh vien</h4>
+                    <p>Cap nhat thong tin sinh vien va gan vao lop phu hop trong he thong.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=sinhvien</p>
+                    <a class="btn btn-accent" href="./catalog.html?resource=sinhvien">Mo danh muc Sinh vien</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Hoc vu</span>
+                    <h4>Nam hoc</h4>
+                    <p>Quan ly nam bat dau, nam ket thuc va ma nam hoc theo chu ky.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=namhoc</p>
+                    <a class="btn btn-ghost" href="./catalog.html?resource=namhoc">Mo danh muc Nam hoc</a>
+                </article>
+
+                <article class="catalog-card">
+                    <span class="kicker">Hoc vu</span>
+                    <h4>Hoc ky</h4>
+                    <p>Thiet lap hoc ky theo nam hoc va khoang thoi gian van hanh.</p>
+                    <p class="meta-line">URL nhanh: catalog?resource=hocky</p>
+                    <a class="btn btn-ghost" href="./catalog.html?resource=hocky">Mo danh muc Hoc ky</a>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+.payment-result-card {
+    width: min(760px, 100%);
+    display: grid;
+    gap: 14px;
+}
+
+.payment-result-title {
+    font-size: 30px;
+}
+
+.payment-result-table-wrap {
+    overflow: visible;
+}
+
+.payment-result-table {
+    min-width: 0;
+}
+
+.payment-result-label {
+    width: 180px;
+}
+
+.payment-result-subtitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.payment-result-json {
+    margin: 0;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #f5f9ff;
+    overflow: auto;
+}
+
+.payment-result-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+    .payment-result-title {
+        font-size: 25px;
+    }
+
+    .payment-result-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

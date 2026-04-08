@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hoa don hoc phi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./invoices.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <student-sidebar></student-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Hoa don hoc phi" subtitle="Theo doi cong no va thanh toan theo tung hoa don"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Sinh vien / Hoa don hoc phi</p>
+                <div class="invoice-actions">
+                    <a class="btn btn-ghost" href="./overview.html">Tong quan</a>
+                    <a class="btn btn-ghost" href="./registrations.html">Mon hoc dang ky</a>
+                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tong so hoa don</p>
+                    <h3 id="inv-stat-total">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Da thanh toan du</p>
+                    <h3 id="inv-stat-paid">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Con no</p>
+                    <h3 id="inv-stat-debt">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tong cong no</p>
+                    <h3 id="inv-stat-debt-amount">0 VND</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tong da nop</p>
+                    <h3 id="inv-stat-paid-amount">0 VND</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Hoa don qua han</p>
+                    <h3 id="inv-stat-overdue">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Han thanh toan gan nhat</p>
+                    <h3 id="inv-stat-nearest-due">-</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Danh sach hoa don hoc phi</h3>
+                    <span class="muted">Chi tiet hoa don va thanh toan truc tiep qua MoMo</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ma hoa don</th>
+                                <th>Hoc ky</th>
+                                <th>Tong tien</th>
+                                <th>Da nop</th>
+                                <th>Con no</th>
+                                <th>Han thanh toan</th>
+                                <th>Trang thai</th>
+                                <th>Thao tac</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-body">
+                            <tr>
+                                <td colspan="8" class="empty">Dang tai du lieu hoa don...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-card">
+            <div class="form-card payment-form-card">
+                <div class="form-header">
+                    <h4>Thanh toan MoMo</h4>
+                    <p class="muted payment-modal-hint">Nhap so tien can nop, he thong se chuyen den cong MoMo.</p>
+                </div>
+
+                <form id="payment-form">
+                    <input id="pay-ma-hoa-don" type="hidden" />
+
+                    <div class="form-body">
+                        <div class="form-field">
+                            <label>So tien nop</label>
+                            <input id="pay-so-tien" class="input" type="number" min="1000" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Ghi chu</label>
+                            <textarea id="pay-ghi-chu" class="textarea" placeholder="Tuy chon"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="button" id="pay-cancel" class="btn btn-ghost">Huy</button>
+                        <button type="submit" id="pay-submit" class="btn btn-primary">Thanh toan voi MoMo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./invoices.js"></script>
+</body>
+
+</html>

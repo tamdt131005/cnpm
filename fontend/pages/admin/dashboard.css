@@ -1,0 +1,12 @@
+.admin-dashboard-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+    .admin-dashboard-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

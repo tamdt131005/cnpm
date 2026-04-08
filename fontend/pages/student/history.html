@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch sử thanh toán</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./history.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <student-sidebar></student-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Lịch sử thanh toán" subtitle="Theo dõi tất cả giao dịch đã thực hiện"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Sinh viên / Lịch sử thanh toán</p>
+                <div class="history-actions">
+                    <a class="btn btn-ghost" href="./overview.html">Tổng quan</a>
+                    <a class="btn btn-ghost" href="./invoices.html">Hóa đơn học phí</a>
+                    <a class="btn btn-ghost" href="./registrations.html">Môn học đăng ký</a>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Số lượt thanh toán</p>
+                    <h3 id="history-count">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Tổng tiền đã nộp</p>
+                    <h3 id="history-total">0 ₫</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Hóa đơn đã tác động</p>
+                    <h3 id="history-invoices">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Thanh toán gần nhất</p>
+                    <h3 id="history-latest">-</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Danh sách giao dịch</h3>
+                    <a class="btn btn-ghost" href="./overview.html">Quay lại tổng quan</a>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã giao dịch</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Số tiền</th>
+                                <th>Ngày thanh toán</th>
+                                <th>Phương thức</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <tr>
+                                <td colspan="6" class="empty">Đang tải lịch sử thanh toán...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./history.js"></script>
+</body>
+
+</html>

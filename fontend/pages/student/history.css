@@ -1,0 +1,26 @@
+.stat-grid {
+    margin-bottom: 16px;
+}
+
+.history-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stat-card h3 {
+    color: #143a74;
+}
+
+#history-body td:nth-child(3) {
+    font-weight: 700;
+    color: #0f3165;
+}
+
+@media (max-width: 760px) {
+    .history-actions .btn,
+    .section-head .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

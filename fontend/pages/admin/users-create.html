@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tao tai khoan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="./users-create.css" />
+</head>
+
+<body>
+    <div class="page-shell app-layout">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="content-pane">
+            <app-topbar title="Tao tai khoan" subtitle="Khoi tao tai khoan moi theo vai tro trong he thong"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Admin / Tai khoan / Tao moi</p>
+                <div class="user-create-actions">
+                    <a class="btn btn-ghost" href="./dashboard.html">Dashboard</a>
+                    <a class="btn btn-ghost" href="./users-manage.html">Quan ly tai khoan</a>
+                </div>
+            </section>
+
+            <section class="stat-grid">
+                <article class="stat-card">
+                    <p>Tong tai khoan</p>
+                    <h3 id="user-stat-total">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Admin</p>
+                    <h3 id="user-stat-admin">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Ke toan</p>
+                    <h3 id="user-stat-staff">0</h3>
+                </article>
+                <article class="stat-card">
+                    <p>Sinh vien</p>
+                    <h3 id="user-stat-student">0</h3>
+                </article>
+            </section>
+
+            <section class="section card">
+                <div class="section-head">
+                    <h3>Thong tin tai khoan moi</h3>
+                    <span class="muted">Du lieu tao moi se dong bo ngay vao danh sach quan ly</span>
+                </div>
+
+                <form id="user-form" class="user-form-grid">
+                    <div class="form-field">
+                        <label for="maNguoiDung">Ma nguoi dung</label>
+                        <input id="maNguoiDung" name="maNguoiDung" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="tenDangNhap">Ten dang nhap</label>
+                        <input id="tenDangNhap" name="tenDangNhap" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="matKhau">Mat khau</label>
+                        <input id="matKhau" name="matKhau" type="password" class="input" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="hoTen">Ho ten</label>
+                        <input id="hoTen" name="hoTen" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="soDienThoai">So dien thoai</label>
+                        <input id="soDienThoai" name="soDienThoai" class="input" />
+                    </div>
+                    <div class="form-field">
+                        <label for="vaiTro">Vai tro</label>
+                        <select id="vaiTro" name="vaiTro" class="select">
+                            <option value="SinhVien">Sinh vien</option>
+                            <option value="KeToan">Ke toan</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="user-form-actions">
+                        <button id="user-submit" type="submit" class="btn btn-primary">Tao tai khoan</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/app-shell.js"></script>
+    <script src="../../components/components.js"></script>
+    <script src="./users-create.js"></script>
+</body>
+
+</html>
