@@ -1,4 +1,4 @@
-(function initAdminDashboardPage() {
+﻿(function initAdminDashboardPage() {
     let session = null;
 
     const refs = {
@@ -20,7 +20,7 @@
         const response = await api.get(`/admin/overview?${params.toString()}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Khong the tai tong quan admin');
+            throw new Error(response?.message || 'Không thể tai Tổng quan admin');
         }
 
         refs.totalUsers.textContent = response.data.totalUsers ?? 0;
@@ -44,3 +44,4 @@
         }
     });
 })();
+

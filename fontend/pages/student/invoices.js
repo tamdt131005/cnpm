@@ -1,4 +1,4 @@
-(function initStudentInvoices() {
+﻿(function initStudentInvoices() {
     let session = null;
     let invoices = [];
 
@@ -54,7 +54,7 @@
 
     function badgeForStatus(invoice) {
         if (numberValue(invoice.conNo) <= 0) {
-            return '<span class="badge success">Da thanh toan</span>';
+            return '<span class="badge success">Da thanh toán</span>';
         }
 
         if (isOverdueInvoice(invoice)) {
@@ -83,7 +83,7 @@
 
     function renderInvoices() {
         if (!invoices.length) {
-            refs.invoiceBody.innerHTML = '<tr><td colspan="8" class="empty">Hien chua co hoa don hoc phi.</td></tr>';
+            refs.invoiceBody.innerHTML = '<tr><td colspan="8" class="empty">Hien chua co hóa đơn Học phí.</td></tr>';
             updateStats();
             return;
         }
@@ -111,7 +111,7 @@
                                 data-debt="${conNo}"
                                 ${canPay ? '' : 'disabled'}
                             >
-                                ${canPay ? 'Thanh toan' : 'Hoan tat'}
+                                ${canPay ? 'thanh toán' : 'Hoan tat'}
                             </button>
                         </td>
                     </tr>
@@ -126,7 +126,7 @@
         const response = await api.get(`/student/invoices?maNguoiDung=${session.maNguoiDung}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Khong the tai danh sach hoa don');
+            throw new Error(response?.message || 'Không thể Tải danh sách hóa đơn');
         }
 
         invoices = Array.isArray(response.data.hoaDon) ? response.data.hoaDon : [];
@@ -180,12 +180,12 @@
             const ghiChu = refs.payGhiChu.value.trim();
 
             if (!maHoaDon || !soTienNop || soTienNop <= 0) {
-                AppShell.showToast('Vui long nhap so tien hop le', 'error');
+                AppShell.showToast('Vui lòng nhap so tien hợp lệ', 'error');
                 return;
             }
 
             refs.paySubmit.disabled = true;
-            refs.paySubmit.textContent = 'Dang xu ly...';
+            refs.paySubmit.textContent = 'Đang xử lý...';
 
             try {
                 const response = await api.post('/student/pay', {
@@ -196,23 +196,23 @@
                 });
 
                 if (!response?.success || !response?.data) {
-                    AppShell.showToast(response?.message || 'Khong the tao thanh toan MoMo', 'error');
+                    AppShell.showToast(response?.message || 'Không thể tao thanh toán MoMo', 'error');
                     return;
                 }
 
                 if (!response.data.payUrl) {
-                    AppShell.showToast('Khong nhan duoc duong dan thanh toan MoMo', 'error');
+                    AppShell.showToast('Không nhận được duong dan thanh toán MoMo', 'error');
                     return;
                 }
 
-                AppShell.showToast('Dang chuyen den cong thanh toan MoMo...', 'info');
+                AppShell.showToast('Đang chuyển đến cổng thanh toán MoMo...', 'info');
                 closeModal();
                 window.location.href = response.data.payUrl;
             } catch (error) {
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             } finally {
                 refs.paySubmit.disabled = false;
-                refs.paySubmit.textContent = 'Thanh toan voi MoMo';
+                refs.paySubmit.textContent = 'thanh toán voi MoMo';
             }
         });
     }
@@ -248,8 +248,9 @@
         try {
             await loadInvoices();
         } catch (error) {
-            refs.invoiceBody.innerHTML = '<tr><td colspan="8" class="empty">Khong the tai du lieu hoa don.</td></tr>';
+            refs.invoiceBody.innerHTML = '<tr><td colspan="8" class="empty">Không thể tai dữ liệu hóa đơn.</td></tr>';
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
     });
 })();
+

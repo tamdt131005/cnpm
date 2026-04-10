@@ -1,4 +1,4 @@
-(function initStudentRegistrations() {
+﻿(function initStudentRegistrations() {
     let session = null;
 
     const refs = {
@@ -27,7 +27,7 @@
 
     function renderRows(items) {
         if (!items.length) {
-            refs.regBody.innerHTML = '<tr><td colspan="8" class="empty">Khong co mon hoc dang ky theo dieu kien loc.</td></tr>';
+            refs.regBody.innerHTML = '<tr><td colspan="8" class="empty">Không có Môn học đăng ký theo dieu kien loc.</td></tr>';
             return;
         }
 
@@ -63,7 +63,7 @@
         const response = await api.get(`/student/registrations?${params.toString()}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Khong the tai danh sach dang ky hoc');
+            throw new Error(response?.message || 'Không thể Tải danh sách đăng ký hoc');
         }
 
         const rows = Array.isArray(response.data.dangKy) ? response.data.dangKy : [];
@@ -108,8 +108,9 @@
         try {
             await loadRegistrations();
         } catch (error) {
-            refs.regBody.innerHTML = '<tr><td colspan="8" class="empty">Khong the tai danh sach dang ky hoc.</td></tr>';
+            refs.regBody.innerHTML = '<tr><td colspan="8" class="empty">Không thể Tải danh sách đăng ký hoc.</td></tr>';
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
     });
 })();
+

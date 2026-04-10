@@ -132,6 +132,11 @@ class StaffService {
         }));
     }
 
+    async getFeeRateOptions(maNguoiDung) {
+        await this.ensureStaff(maNguoiDung);
+        return staffDAO.getFeeRateOptions();
+    }
+
     async getDebts(maNguoiDung) {
         await this.ensureStaff(maNguoiDung);
         const debts = await staffDAO.getDebts();

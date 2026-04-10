@@ -1,4 +1,4 @@
-(function initStudentOverview() {
+﻿(function initStudentOverview() {
     let session = null;
 
     const refs = {
@@ -54,10 +54,10 @@
         refs.hoTen.textContent = profile.hoTen || '-';
         refs.email.textContent = profile.email || '-';
         refs.loai.textContent = profile.loaiSinhVien || profile.trangThai || 'Dang hoc';
-        refs.profileGreeting.textContent = `Xin chao, ${profile.hoTen || profile.maSV || 'sinh vien'}`;
+        refs.profileGreeting.textContent = `Xin chao, ${profile.hoTen || profile.maSV || 'Sinh viên'}`;
 
         refs.statusBadge.className = 'badge success';
-        refs.statusBadge.textContent = 'San sang giao dich';
+        refs.statusBadge.textContent = 'San sang giao dịch';
         refs.statusText.textContent = profile.trangThai || 'Dang hoc';
     }
 
@@ -80,7 +80,7 @@
         const response = await api.get(`/student/profile?maNguoiDung=${session.maNguoiDung}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Khong the tai ho so sinh vien');
+            throw new Error(response?.message || 'Không thể tai ho so Sinh viên');
         }
 
         fillProfile(response.data);
@@ -90,7 +90,7 @@
         const response = await api.get(`/student/invoices?maNguoiDung=${session.maNguoiDung}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Khong the tai danh sach hoa don');
+            throw new Error(response?.message || 'Không thể Tải danh sách hóa đơn');
         }
 
         const invoices = Array.isArray(response.data.hoaDon) ? response.data.hoaDon : [];
@@ -125,9 +125,10 @@
             await Promise.all([loadProfile(), loadInvoices()]);
         } catch (error) {
             refs.statusBadge.className = 'badge danger';
-            refs.statusBadge.textContent = 'Loi tai du lieu';
+            refs.statusBadge.textContent = 'Loi tai dữ liệu';
             refs.statusText.textContent = 'Khong kha dung';
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
     });
 })();
+

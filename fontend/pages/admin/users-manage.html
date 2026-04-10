@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quan ly tai khoan</title>
+    <title>Quản lý Tài khoản</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,19 +17,19 @@
         <admin-sidebar></admin-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Quan ly tai khoan" subtitle="Cap nhat thong tin, doi mat khau va khoa tai khoan"></app-topbar>
+            <app-topbar title="Quản lý tài khoản" subtitle="Cập nhật thông tin, đổi mật khẩu và khóa tài khoản"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Admin / Tai khoan / Quan ly</p>
+                <p class="breadcrumb">Admin / Tài khoản / Quản lý</p>
                 <div class="user-manage-actions">
                     <a class="btn btn-ghost" href="./dashboard.html">Dashboard</a>
-                    <a class="btn btn-ghost" href="./users-create.html">Tao tai khoan moi</a>
+                    <a class="btn btn-ghost" href="./users-create.html">Tạo Tài khoản mới</a>
                 </div>
             </section>
 
             <section class="stat-grid">
                 <article class="stat-card">
-                    <p>Tong tai khoan</p>
+                    <p>Tổng tài khoản</p>
                     <h3 id="user-stat-total">0</h3>
                 </article>
                 <article class="stat-card">
@@ -37,26 +37,26 @@
                     <h3 id="user-stat-admin">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Ke toan</p>
+                    <p>Kế toán</p>
                     <h3 id="user-stat-staff">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tai khoan dang khoa</p>
+                    <p>Tài khoản đang khóa</p>
                     <h3 id="user-stat-locked">0</h3>
                 </article>
             </section>
 
             <section class="section card">
                 <div class="section-head user-section-head">
-                    <h3>Danh sach tai khoan</h3>
+                    <h3>Danh sách tài khoản</h3>
                     <div class="user-tools">
                         <select id="user-role-filter" class="select">
-                            <option value="">Tat ca vai tro</option>
+                            <option value="">Tất cả vai trò</option>
                             <option value="Admin">Admin</option>
-                            <option value="KeToan">Ke toan</option>
-                            <option value="SinhVien">Sinh vien</option>
+                            <option value="KeToan">Kế toán</option>
+                            <option value="SinhVien">Sinh viên</option>
                         </select>
-                        <button id="reload-users" class="btn btn-ghost" type="button">Tai lai</button>
+                        <button id="reload-users" class="btn btn-ghost" type="button">Tải lại</button>
                     </div>
                 </div>
 
@@ -64,18 +64,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Ma</th>
-                                <th>Ten dang nhap</th>
-                                <th>Ho ten</th>
+                                <th>Mã</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
                                 <th>Email</th>
-                                <th>Vai tro</th>
-                                <th>Trang thai</th>
-                                <th>Thao tac</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="users-body">
                             <tr>
-                                <td colspan="7" class="empty">Dang tai danh sach tai khoan...</td>
+                                <td colspan="7" class="empty">Đang tải danh sách tài khoản...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -91,3 +91,5 @@
 </body>
 
 </html>
+
+

@@ -1,4 +1,4 @@
-(function initAdminUserCreatePage() {
+﻿(function initAdminUserCreatePage() {
     let session = null;
 
     const refs = {
@@ -21,7 +21,7 @@
         const response = await api.get(`/nguoidung?maNguoiDung=${session.maNguoiDung}`);
 
         if (!response?.success || !Array.isArray(response?.data)) {
-            throw new Error(response?.message || 'Khong the tai thong ke tai khoan');
+            throw new Error(response?.message || 'Không thể tai thống kê Tài khoản');
         }
 
         updateStats(response.data);
@@ -48,28 +48,28 @@
             };
 
             if (!payload.maNguoiDung || !payload.tenDangNhap || !payload.matKhau) {
-                AppShell.showToast('Vui long nhap day du ma nguoi dung, ten dang nhap va mat khau', 'error');
+                AppShell.showToast('Vui lòng nhap đầy đủ ma nguoi dung, ten Đăng nhập va Mật khẩu', 'error');
                 return;
             }
 
             refs.userSubmit.disabled = true;
-            refs.userSubmit.textContent = 'Dang tao...';
+            refs.userSubmit.textContent = 'Đang tạo...';
 
             try {
                 const response = await api.post('/nguoidung', payload);
                 if (!response?.success) {
-                    AppShell.showToast(response?.message || 'Khong the tao tai khoan', 'error');
+                    AppShell.showToast(response?.message || 'Không thể tao Tài khoản', 'error');
                     return;
                 }
 
-                AppShell.showToast('Tao tai khoan thanh cong', 'info');
+                AppShell.showToast('Tao Tài khoản thanh cong', 'info');
                 resetForm();
                 await loadUserStats();
             } catch (error) {
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             } finally {
                 refs.userSubmit.disabled = false;
-                refs.userSubmit.textContent = 'Tao tai khoan';
+                refs.userSubmit.textContent = 'Tao Tài khoản';
             }
         });
     }
@@ -99,3 +99,4 @@
         }
     });
 })();
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -52,11 +52,15 @@
                             <div class="form-grid">
                                 <div class="form-field">
                                     <label for="maMH">Mã môn học</label>
-                                    <input id="maMH" name="maMH" class="input" placeholder="VD: CTDLGT" required />
+                                    <select id="maMH" name="maMH" class="select" required>
+                                        <option value="">Đang tải môn học...</option>
+                                    </select>
                                 </div>
                                 <div class="form-field">
                                     <label for="maHocKy">Mã học kỳ</label>
-                                    <input id="maHocKy" name="maHocKy" class="input" placeholder="VD: HK1_2025" required />
+                                    <select id="maHocKy" name="maHocKy" class="select" required>
+                                        <option value="">Đang tải học kỳ...</option>
+                                    </select>
                                 </div>
                                 <div class="form-field">
                                     <label for="giaPerTinChi">Giá mỗi tín chỉ (VND)</label>
@@ -117,3 +121,5 @@
 </body>
 
 </html>
+
+

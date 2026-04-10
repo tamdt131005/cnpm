@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hoa don hoc phi</title>
+    <title>hóa đơn Học phí</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,71 +17,71 @@
         <student-sidebar></student-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Hoa don hoc phi" subtitle="Theo doi cong no va thanh toan theo tung hoa don"></app-topbar>
+            <app-topbar title="hóa đơn Học phí" subtitle="Theo doi công nợ va thanh toán theo tung hóa đơn"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Sinh vien / Hoa don hoc phi</p>
+                <p class="breadcrumb">Sinh viên / hóa đơn Học phí</p>
                 <div class="invoice-actions">
-                    <a class="btn btn-ghost" href="./overview.html">Tong quan</a>
-                    <a class="btn btn-ghost" href="./registrations.html">Mon hoc dang ky</a>
-                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                    <a class="btn btn-ghost" href="./overview.html">Tổng quan</a>
+                    <a class="btn btn-ghost" href="./registrations.html">Môn học đăng ký</a>
+                    <a class="btn btn-ghost" href="./history.html">lịch sử thanh toán</a>
                 </div>
             </section>
 
             <section class="stat-grid">
                 <article class="stat-card">
-                    <p>Tong so hoa don</p>
+                    <p>Tổng Số hóa đơn</p>
                     <h3 id="inv-stat-total">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Da thanh toan du</p>
+                    <p>Đã thanh toán du</p>
                     <h3 id="inv-stat-paid">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Con no</p>
+                    <p>Còn nợ</p>
                     <h3 id="inv-stat-debt">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tong cong no</p>
+                    <p>Tổng công nợ</p>
                     <h3 id="inv-stat-debt-amount">0 VND</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tong da nop</p>
+                    <p>Tổng Đã nộp</p>
                     <h3 id="inv-stat-paid-amount">0 VND</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Hoa don qua han</p>
+                    <p>hóa đơn quá hạn</p>
                     <h3 id="inv-stat-overdue">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Han thanh toan gan nhat</p>
+                    <p>Hạn thanh toán gan nhat</p>
                     <h3 id="inv-stat-nearest-due">-</h3>
                 </article>
             </section>
 
             <section class="section card">
                 <div class="section-head">
-                    <h3>Danh sach hoa don hoc phi</h3>
-                    <span class="muted">Chi tiet hoa don va thanh toan truc tiep qua MoMo</span>
+                    <h3>Danh sách hóa đơn Học phí</h3>
+                    <span class="muted">chi tiết hóa đơn va thanh toán truc tiep qua MoMo</span>
                 </div>
 
                 <div class="table-wrap">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Ma hoa don</th>
-                                <th>Hoc ky</th>
-                                <th>Tong tien</th>
-                                <th>Da nop</th>
-                                <th>Con no</th>
-                                <th>Han thanh toan</th>
-                                <th>Trang thai</th>
-                                <th>Thao tac</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Học kỳ</th>
+                                <th>Tổng tien</th>
+                                <th>Đã nộp</th>
+                                <th>Còn nợ</th>
+                                <th>Hạn thanh toán</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="invoice-body">
                             <tr>
-                                <td colspan="8" class="empty">Dang tai du lieu hoa don...</td>
+                                <td colspan="8" class="empty">Đang tải dữ liệu hóa đơn...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -94,8 +94,8 @@
         <div class="modal-card">
             <div class="form-card payment-form-card">
                 <div class="form-header">
-                    <h4>Thanh toan MoMo</h4>
-                    <p class="muted payment-modal-hint">Nhap so tien can nop, he thong se chuyen den cong MoMo.</p>
+                    <h4>thanh toán MoMo</h4>
+                    <p class="muted payment-modal-hint">Nhap Số tien can nop, hệ thống se chuyen den cong MoMo.</p>
                 </div>
 
                 <form id="payment-form">
@@ -103,19 +103,19 @@
 
                     <div class="form-body">
                         <div class="form-field">
-                            <label>So tien nop</label>
+                            <label>Số tien nop</label>
                             <input id="pay-so-tien" class="input" type="number" min="1000" required />
                         </div>
 
                         <div class="form-field">
                             <label>Ghi chu</label>
-                            <textarea id="pay-ghi-chu" class="textarea" placeholder="Tuy chon"></textarea>
+                            <textarea id="pay-ghi-chu" class="textarea" placeholder="Tùy chọn"></textarea>
                         </div>
                     </div>
 
                     <div class="form-footer">
                         <button type="button" id="pay-cancel" class="btn btn-ghost">Huy</button>
-                        <button type="submit" id="pay-submit" class="btn btn-primary">Thanh toan voi MoMo</button>
+                        <button type="submit" id="pay-submit" class="btn btn-primary">thanh toán voi MoMo</button>
                     </div>
                 </form>
             </div>
@@ -129,3 +129,5 @@
 </body>
 
 </html>
+
+

@@ -1,23 +1,33 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Báo cáo công nợ</title>
+    <title>Báo cáo tài chính | Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
-    <link rel="stylesheet" href="./report.css" />
+    <link rel="stylesheet" href="../staff/report.css" />
 </head>
 
 <body>
     <div class="page-shell app-layout">
-        <staff-sidebar></staff-sidebar>
+        <admin-sidebar></admin-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Báo cáo tài vụ" subtitle="Phát sinh hóa đơn, ghi nhận thu và theo dõi báo cáo"></app-topbar>
+            <app-topbar title="Báo cáo tài chính" subtitle="Phát sinh hóa đơn, ghi nhận thu và theo dõi báo cáo toàn hệ thống"></app-topbar>
+
+            <section class="dashboard-toolbar">
+                <p class="breadcrumb">Admin / Báo cáo tài chính</p>
+                <div class="invoice-actions">
+                    <a class="btn btn-ghost" href="#section-generate">Phát sinh hóa đơn</a>
+                    <a class="btn btn-ghost" href="#section-invoices">Quản lý hóa đơn</a>
+                    <a class="btn btn-ghost" href="#section-summary">Tổng hợp</a>
+                    <a class="btn btn-ghost" href="./dashboard.html">Dashboard</a>
+                </div>
+            </section>
 
             <section class="stat-grid">
                 <article class="stat-card">
@@ -38,7 +48,7 @@
                 </article>
             </section>
 
-            <section class="section card">
+            <section id="section-generate" class="section card">
                 <div class="section-head">
                     <h3>Phát sinh hóa đơn theo học kỳ</h3>
                 </div>
@@ -140,7 +150,7 @@
                 </div>
             </section>
 
-            <section class="section card">
+            <section id="section-invoices" class="section card">
                 <div class="section-head report-head-wrap">
                     <h3>Quản lý hóa đơn và miễn giảm</h3>
                     <form id="invoice-filter-form" class="report-inline-form">
@@ -187,7 +197,7 @@
                 </div>
             </section>
 
-            <section class="section card report-grid-two">
+            <section id="section-payments" class="section card report-grid-two">
                 <div class="form-card">
                     <div class="form-header">
                         <h4>Ghi nhận thanh toán thủ công</h4>
@@ -257,7 +267,7 @@
                 </div>
             </section>
 
-            <section class="section card">
+            <section id="section-summary" class="section card">
                 <div class="section-head report-head-wrap">
                     <h3>Tổng hợp báo cáo</h3>
                     <div class="report-inline-form">
@@ -365,10 +375,10 @@
                 </div>
             </section>
 
-            <section class="section card">
+            <section id="section-debts" class="section card">
                 <div class="section-head">
                     <h3>Danh sách công nợ chi tiết</h3>
-                    <a class="btn btn-ghost" href="./rates.html">Quay lại định mức học phí</a>
+                    <a class="btn btn-ghost" href="./dashboard.html">Quay lại dashboard admin</a>
                 </div>
 
                 <div class="table-wrap">
@@ -401,9 +411,7 @@
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/app-shell.js"></script>
     <script src="../../components/components.js"></script>
-    <script src="./report.js"></script>
+    <script src="../staff/report.js"></script>
 </body>
 
 </html>
-
-

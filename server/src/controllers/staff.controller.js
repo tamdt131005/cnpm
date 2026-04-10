@@ -19,6 +19,15 @@ class StaffController {
         }
     }
 
+    async getFeeRateOptions(req, res, next) {
+        try {
+            const data = await staffService.getFeeRateOptions(req.query.maNguoiDung);
+            res.json({ success: true, data });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async getDebts(req, res, next) {
         try {
             const data = await staffService.getDebts(req.query.maNguoiDung);

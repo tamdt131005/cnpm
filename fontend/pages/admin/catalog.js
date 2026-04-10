@@ -21,7 +21,15 @@
             fields: [
                 { name: 'maNganh', label: 'Mã ngành', required: true },
                 { name: 'tenNganh', label: 'Tên ngành', required: true },
-                { name: 'maKhoa', label: 'Mã khoa', required: true }
+                {
+                    name: 'maKhoa',
+                    label: 'Mã khoa',
+                    required: true,
+                    type: 'select',
+                    optionResource: 'khoa',
+                    optionValueKey: 'maKhoa',
+                    optionLabelBuilder: (item) => `${item.maKhoa} - ${item.tenKhoa || '-'}`
+                }
             ],
             columns: ['maNganh', 'tenNganh', 'maKhoa']
         },
@@ -32,7 +40,15 @@
                 { name: 'maLop', label: 'Mã lớp', required: true },
                 { name: 'tenLop', label: 'Tên lớp', required: true },
                 { name: 'nienKhoa', label: 'Niên khóa', type: 'number' },
-                { name: 'maNganh', label: 'Mã ngành', required: true }
+                {
+                    name: 'maNganh',
+                    label: 'Mã ngành',
+                    required: true,
+                    type: 'select',
+                    optionResource: 'nganh',
+                    optionValueKey: 'maNganh',
+                    optionLabelBuilder: (item) => `${item.maNganh} - ${item.tenNganh || '-'}`
+                }
             ],
             columns: ['maLop', 'tenLop', 'nienKhoa', 'maNganh']
         },
@@ -43,7 +59,15 @@
                 { name: 'maMH', label: 'Mã môn học', required: true },
                 { name: 'tenMH', label: 'Tên môn học', required: true },
                 { name: 'soTinChi', label: 'Số tín chỉ', required: true, type: 'number' },
-                { name: 'maKhoa', label: 'Mã khoa', required: true }
+                {
+                    name: 'maKhoa',
+                    label: 'Mã khoa',
+                    required: true,
+                    type: 'select',
+                    optionResource: 'khoa',
+                    optionValueKey: 'maKhoa',
+                    optionLabelBuilder: (item) => `${item.maKhoa} - ${item.tenKhoa || '-'}`
+                }
             ],
             columns: ['maMH', 'tenMH', 'soTinChi', 'maKhoa']
         },
@@ -66,7 +90,15 @@
                 { name: 'diaChi', label: 'Địa chỉ' },
                 { name: 'email', label: 'Email', type: 'email' },
                 { name: 'soDienThoai', label: 'Số điện thoại' },
-                { name: 'maLop', label: 'Mã lớp', required: true },
+                {
+                    name: 'maLop',
+                    label: 'Mã lớp',
+                    required: true,
+                    type: 'select',
+                    optionResource: 'lop',
+                    optionValueKey: 'maLop',
+                    optionLabelBuilder: (item) => `${item.maLop} - ${item.tenLop || '-'}`
+                },
                 {
                     name: 'trangThai',
                     label: 'Trạng thái',
@@ -99,7 +131,15 @@
                 { name: 'maHocKy', label: 'Mã học kỳ', required: true },
                 { name: 'tenHocKy', label: 'Tên học kỳ', required: true },
                 { name: 'hocKySo', label: 'Số học kỳ', required: true, type: 'number' },
-                { name: 'maNamHoc', label: 'Mã năm học', required: true },
+                {
+                    name: 'maNamHoc',
+                    label: 'Mã năm học',
+                    required: true,
+                    type: 'select',
+                    optionResource: 'namhoc',
+                    optionValueKey: 'maNamHoc',
+                    optionLabelBuilder: (item) => `${item.maNamHoc} - ${item.tenNamHoc || '-'}`
+                },
                 { name: 'ngayBatDau', label: 'Ngày bắt đầu', type: 'date' },
                 { name: 'ngayKetThuc', label: 'Ngày kết thúc', type: 'date' }
             ],
@@ -111,6 +151,7 @@
     let currentResource = RESOURCE_SCHEMAS[resolveResourceFromQuery()] ? resolveResourceFromQuery() : 'khoa';
     let editingId = null;
     let rows = [];
+    let optionCache = {};
 
     const refs = {
         resourceSelect: null,
@@ -152,21 +193,75 @@
         return value;
     }
 
-    function renderField(field, value, disableIdField) {
+    function clearOptionCache() {
+        optionCache = {};
+    }
+
+    async function loadOptionResource(resource) {
+        if (optionCache[resource]) {
+            return optionCache[resource];
+        }
+
+        const params = new URLSearchParams({ maNguoiDung: session.maNguoiDung });
+        const response = await api.get(`/admin/catalog/${resource}?${params.toString()}`);
+
+        if (!response?.success || !Array.isArray(response?.data)) {
+            throw new Error(response?.message || `Không thể tải option cho ${resource}`);
+        }
+
+        optionCache[resource] = response.data;
+        return optionCache[resource];
+    }
+
+    async function resolveSelectOptions(field) {
+        if (field.optionResource) {
+            const source = await loadOptionResource(field.optionResource);
+            return source.map((item) => {
+                const value = item[field.optionValueKey];
+                const label = field.optionLabelBuilder
+                    ? field.optionLabelBuilder(item)
+                    : String(value ?? '');
+
+                return {
+                    value: String(value ?? ''),
+                    label
+                };
+            });
+        }
+
+        return (field.options || []).map((option) => ({
+            value: String(option.value ?? ''),
+            label: option.label
+        }));
+    }
+
+    async function renderField(field, value, disableIdField) {
         const val = normalizeFieldValue(field, value);
         const disabledAttr = disableIdField && field.name === RESOURCE_SCHEMAS[currentResource].idKey ? 'disabled' : '';
         const requiredAttr = field.required ? 'required' : '';
 
         if (field.type === 'select') {
-            const options = (field.options || [])
-                .map((opt) => `<option value="${opt.value}" ${String(val) === opt.value ? 'selected' : ''}>${opt.label}</option>`)
-                .join('');
+            const options = await resolveSelectOptions(field);
+            const hasValue = String(val || '').length > 0;
+            const hasSelectedOption = options.some((opt) => opt.value === String(val));
+
+            const optionMarkup = [
+                `<option value="" ${!hasValue ? 'selected' : ''}>Chọn ${field.label.toLowerCase()}</option>`,
+                ...options.map(
+                    (opt) =>
+                        `<option value="${opt.value}" ${String(val) === opt.value ? 'selected' : ''}>${opt.label}</option>`
+                )
+            ];
+
+            if (hasValue && !hasSelectedOption) {
+                optionMarkup.push(`<option value="${val}" selected>${val}</option>`);
+            }
 
             return `
                 <div class="form-field">
                     <label for="field-${field.name}">${field.label}</label>
                     <select id="field-${field.name}" name="${field.name}" class="select" ${requiredAttr} ${disabledAttr}>
-                        ${options}
+                        ${optionMarkup.join('')}
                     </select>
                 </div>
             `;
@@ -188,12 +283,14 @@
         `;
     }
 
-    function renderForm(resource, data) {
+    async function renderForm(resource, data) {
         const schema = RESOURCE_SCHEMAS[resource];
         const disableIdField = Boolean(data);
-        refs.catalogFormFields.innerHTML = schema.fields
-            .map((field) => renderField(field, data ? data[field.name] : '', disableIdField))
-            .join('');
+        const fieldHtml = await Promise.all(
+            schema.fields.map((field) => renderField(field, data ? data[field.name] : '', disableIdField))
+        );
+
+        refs.catalogFormFields.innerHTML = fieldHtml.join('');
 
         refs.catalogSubmit.textContent = editingId ? `Lưu ${schema.label}` : `Thêm ${schema.label}`;
         refs.catalogCancel.hidden = !editingId;
@@ -277,9 +374,9 @@
         return payload;
     }
 
-    function resetEditing() {
+    async function resetEditing() {
         editingId = null;
-        renderForm(currentResource, null);
+        await renderForm(currentResource, null);
         refs.catalogForm.reset();
     }
 
@@ -316,7 +413,8 @@
             }
 
             AppShell.showToast('Lưu dữ liệu thành công', 'info');
-            resetEditing();
+            clearOptionCache();
+            await resetEditing();
             await loadCatalog(currentResource);
             await loadOverview();
         } catch (error) {
@@ -343,8 +441,9 @@
             }
 
             AppShell.showToast('Đã xóa bản ghi', 'info');
+            clearOptionCache();
             if (editingId === id) {
-                resetEditing();
+                await resetEditing();
             }
             await loadCatalog(resource);
             await loadOverview();
@@ -372,25 +471,27 @@
         refs.catalogForm.addEventListener('submit', saveRecord);
 
         refs.catalogCancel.addEventListener('click', () => {
-            resetEditing();
+            resetEditing().catch((error) => {
+                AppShell.showToast(AppShell.resolveApiError(error), 'error');
+            });
         });
 
-        refs.resourceSelect.addEventListener('change', async() => {
+        refs.resourceSelect.addEventListener('change', async () => {
             currentResource = refs.resourceSelect.value;
 
             const nextUrl = new URL(window.location.href);
             nextUrl.searchParams.set('resource', currentResource);
             window.history.replaceState({}, '', nextUrl);
 
-            resetEditing();
             try {
+                await resetEditing();
                 await loadCatalog(currentResource);
             } catch (error) {
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             }
         });
 
-        refs.reloadCatalog.addEventListener('click', async() => {
+        refs.reloadCatalog.addEventListener('click', async () => {
             try {
                 await loadCatalog(currentResource);
                 await loadOverview();
@@ -399,7 +500,7 @@
             }
         });
 
-        refs.catalogBody.addEventListener('click', async(event) => {
+        refs.catalogBody.addEventListener('click', async (event) => {
             const button = event.target.closest('button[data-action]');
             if (!button) {
                 return;
@@ -419,7 +520,7 @@
                 }
 
                 editingId = id;
-                renderForm(currentResource, item);
+                await renderForm(currentResource, item);
                 return;
             }
 
@@ -429,7 +530,7 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', async() => {
+    document.addEventListener('DOMContentLoaded', async () => {
         session = AppShell.requireRole(['Admin']);
         if (!session) {
             return;
@@ -437,7 +538,14 @@
 
         bindElements();
         refs.resourceSelect.value = currentResource;
-        renderForm(currentResource, null);
+
+        try {
+            await renderForm(currentResource, null);
+        } catch (error) {
+            refs.catalogFormFields.innerHTML = '<div class="empty">Không thể tải dữ liệu option cho form.</div>';
+            AppShell.showToast(AppShell.resolveApiError(error), 'error');
+        }
+
         wireActions();
 
         try {

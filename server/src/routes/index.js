@@ -8,6 +8,15 @@ import staffRoutes from './staff.route.js';
 import adminRoutes from './admin.route.js';
 
 const router = Router();
+
+router.get('/', (req, res) => {
+	res.json({
+		success: true,
+		message: 'API thu hoc phi dang hoat dong',
+		groups: ['auth', 'nguoidung', 'student', 'staff', 'admin']
+	});
+});
+
 router.use('/auth', authRoutes); // Xác thực
 router.use('/nguoidung', nguoiDungRoutes); // Quản lý người dùng
 router.use('/student', studentRoutes); // Cổng sinh viên

@@ -1,4 +1,4 @@
-(function initAdminUsersManagePage() {
+﻿(function initAdminUsersManagePage() {
     let session = null;
     let users = [];
 
@@ -18,10 +18,10 @@
         }
 
         if (role === 'KeToan') {
-            return 'Ke toan';
+            return 'Kế toán';
         }
 
-        return 'Sinh vien';
+        return 'Sinh viên';
     }
 
     function updateStats(items) {
@@ -33,7 +33,7 @@
 
     function renderRows(items) {
         if (!items.length) {
-            refs.tbody.innerHTML = '<tr><td colspan="7" class="empty">Khong co tai khoan phu hop.</td></tr>';
+            refs.tbody.innerHTML = '<tr><td colspan="7" class="empty">Không có Tài khoản phu hop.</td></tr>';
             updateStats(items);
             return;
         }
@@ -51,15 +51,15 @@
                         <td>${roleLabel(item.vaiTro)}</td>
                         <td>
                             <span class="${isLocked ? 'locked-label' : 'active-label'}">
-                                ${isLocked ? 'Dang khoa' : 'Hoat dong'}
+                                ${isLocked ? 'Đang khóa' : 'Hoạt động'}
                             </span>
                         </td>
                         <td>
                             <div class="user-action-row">
                                 <button type="button" class="btn btn-ghost" data-action="edit" data-id="${item.maNguoiDung}">Sua</button>
-                                <button type="button" class="btn btn-ghost" data-action="password" data-id="${item.maNguoiDung}">Doi mat khau</button>
+                                <button type="button" class="btn btn-ghost" data-action="password" data-id="${item.maNguoiDung}">Doi Mật khẩu</button>
                                 <button type="button" class="btn ${isLocked ? 'btn-primary' : 'btn-danger'}" data-action="lock" data-id="${item.maNguoiDung}" data-locked="${isLocked ? '1' : '0'}">
-                                    ${isLocked ? 'Mo khoa' : 'Khoa'}
+                                    ${isLocked ? 'Mở khóa' : 'Khoa'}
                                 </button>
                             </div>
                         </td>
@@ -85,7 +85,7 @@
 
         const response = await api.get(`/nguoidung?${params.toString()}`);
         if (!response?.success || !Array.isArray(response?.data)) {
-            throw new Error(response?.message || 'Khong the tai danh sach tai khoan');
+            throw new Error(response?.message || 'Không thể Tải danh sách Tài khoản');
         }
 
         users = response.data;
@@ -128,11 +128,11 @@
             });
 
             if (!response?.success) {
-                AppShell.showToast(response?.message || 'Khong the cap nhat tai khoan', 'error');
+                AppShell.showToast(response?.message || 'Không thể Cập nhật Tài khoản', 'error');
                 return;
             }
 
-            AppShell.showToast('Cap nhat tai khoan thanh cong', 'info');
+            AppShell.showToast('Cập nhật Tài khoản thanh cong', 'info');
             await loadUsers();
         } catch (error) {
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
@@ -140,13 +140,13 @@
     }
 
     async function handleChangePassword(maNguoiDung) {
-        const matKhauMoi = window.prompt('Nhap mat khau moi (toi thieu 6 ky tu)');
+        const matKhauMoi = window.prompt('Nhập mật khẩu moi (toi thieu 6 ky tu)');
         if (matKhauMoi === null) {
             return;
         }
 
         if (matKhauMoi.trim().length < 6) {
-            AppShell.showToast('Mat khau moi phai co it nhat 6 ky tu', 'error');
+            AppShell.showToast('Mật khẩu moi phai co it nhat 6 ky tu', 'error');
             return;
         }
 
@@ -157,11 +157,11 @@
             });
 
             if (!response?.success) {
-                AppShell.showToast(response?.message || 'Khong the doi mat khau', 'error');
+                AppShell.showToast(response?.message || 'Không thể doi Mật khẩu', 'error');
                 return;
             }
 
-            AppShell.showToast('Doi mat khau thanh cong', 'info');
+            AppShell.showToast('Doi Mật khẩu thanh cong', 'info');
         } catch (error) {
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
@@ -169,7 +169,7 @@
 
     async function handleLockToggle(maNguoiDung, isLocked) {
         const nextState = !isLocked;
-        const lyDo = nextState ? window.prompt('Nhap ly do khoa tai khoan', 'Khoa theo yeu cau quan tri') : '';
+        const lyDo = nextState ? window.prompt('Nhap ly do khoa Tài khoản', 'Khoa theo yeu cau quan tri') : '';
 
         if (nextState && lyDo === null) {
             return;
@@ -183,11 +183,11 @@
             });
 
             if (!response?.success) {
-                AppShell.showToast(response?.message || 'Khong the cap nhat trang thai khoa', 'error');
+                AppShell.showToast(response?.message || 'Không thể Cập nhật Trạng thái khoa', 'error');
                 return;
             }
 
-            AppShell.showToast(nextState ? 'Da khoa tai khoan' : 'Da mo khoa tai khoan', 'info');
+            AppShell.showToast(nextState ? 'Da khoa Tài khoản' : 'Da Mở khóa Tài khoản', 'info');
             await loadUsers();
         } catch (error) {
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
@@ -258,8 +258,9 @@
         try {
             await loadUsers();
         } catch (error) {
-            refs.tbody.innerHTML = '<tr><td colspan="7" class="empty">Khong the tai danh sach tai khoan.</td></tr>';
+            refs.tbody.innerHTML = '<tr><td colspan="7" class="empty">Không thể Tải danh sách Tài khoản.</td></tr>';
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
     });
 })();
+

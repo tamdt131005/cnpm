@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bảng điều khiển sinh viên</title>
+    <title>Báº£ng Ä‘iá»u khiá»ƒn sinh viÃªn</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,115 +17,115 @@
         <student-sidebar></student-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Bảng điều khiển sinh viên" subtitle="Theo dõi học phí theo kỳ" search-placeholder="Tìm mã hóa đơn hoặc học kỳ"></app-topbar>
+            <app-topbar title="Báº£ng Ä‘iá»u khiá»ƒn sinh viÃªn" subtitle="Theo dÃµi há»c phÃ­ theo ká»³" search-placeholder="TÃ¬m mÃ£ hÃ³a Ä‘Æ¡n hoáº·c há»c ká»³"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Trang chủ / Sinh viên / Bảng điều khiển</p>
-                <a class="btn btn-ghost" href="./history.html">Lịch sử thanh toán</a>
+                <p class="breadcrumb">Trang chá»§ / Sinh viÃªn / Báº£ng Ä‘iá»u khiá»ƒn</p>
+                <a class="btn btn-ghost" href="./history.html">Lá»‹ch sá»­ thanh toÃ¡n</a>
             </section>
 
             <section class="dashboard-banner card">
                 <div class="dashboard-banner-copy">
                     <span class="kicker">Student Finance Center</span>
-                    <h3 id="profile-greeting">Xin chào, sinh viên</h3>
+                    <h3 id="profile-greeting">Xin chÃ o, sinh viÃªn</h3>
                     <p>
-                        Theo dõi hóa đơn học phí, công nợ còn lại và chủ động xử lý những khoản đến hạn ngay trong một màn hình.
+                        Theo dÃµi hÃ³a Ä‘Æ¡n há»c phÃ­, cÃ´ng ná»£ cÃ²n láº¡i vÃ  chá»§ Ä‘á»™ng xá»­ lÃ½ nhá»¯ng khoáº£n Ä‘áº¿n háº¡n Ngày trong má»™t mÃ n hÃ¬nh.
                     </p>
                 </div>
                 <div class="dashboard-banner-actions">
-                    <button id="jump-invoice" class="btn btn-primary" type="button">Xem hóa đơn cần xử lý</button>
-                    <button id="jump-registration" class="btn btn-ghost" type="button">Xem môn đã đăng ký</button>
-                    <a class="btn btn-ghost" href="./history.html">Xem giao dịch gần đây</a>
+                    <button id="jump-invoice" class="btn btn-primary" type="button">Xem hÃ³a Ä‘Æ¡n cáº§n xá»­ lÃ½</button>
+                    <button id="jump-registration" class="btn btn-ghost" type="button">Xem mÃ´n Ä‘Ã£ Ä‘Äƒng kÃ½</button>
+                    <a class="btn btn-ghost" href="./history.html">Xem giao dá»‹ch gáº§n Ä‘Ã¢y</a>
                 </div>
             </section>
 
             <section class="finance-grid">
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Tổng số hóa đơn</p>
+                        <p>Tá»•ng sá»‘ hÃ³a Ä‘Æ¡n</p>
                         <span>01</span>
                     </div>
                     <h3 id="stat-total-invoice">0</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Đã thanh toán đủ</p>
+                        <p>ÄÃ£ thanh toÃ¡n Ä‘á»§</p>
                         <span>02</span>
                     </div>
                     <h3 id="stat-paid">0</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Số hóa đơn còn nợ</p>
+                        <p>Sá»‘ hÃ³a Ä‘Æ¡n cÃ²n ná»£</p>
                         <span>03</span>
                     </div>
                     <h3 id="stat-debt">0</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Tổng công nợ còn lại</p>
+                        <p>Tá»•ng cÃ´ng ná»£ cÃ²n láº¡i</p>
                         <span>04</span>
                     </div>
-                    <h3 id="stat-debt-amount">0 ₫</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <h3 id="stat-debt-amount">0 â‚«</h3>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Tổng tiền đã nộp</p>
+                        <p>Tá»•ng tiá»n Ä‘Ã£ ná»™p</p>
                         <span>05</span>
                     </div>
-                    <h3 id="stat-paid-amount">0 ₫</h3>
-                    <a class="finance-link" href="./history.html">Chi tiết</a>
+                    <h3 id="stat-paid-amount">0 â‚«</h3>
+                    <a class="finance-link" href="./history.html">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Hóa đơn quá hạn</p>
+                        <p>HÃ³a Ä‘Æ¡n quÃ¡ háº¡n</p>
                         <span>06</span>
                     </div>
                     <h3 id="stat-overdue">0</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Tổng miễn giảm</p>
+                        <p>Tá»•ng miá»…n giáº£m</p>
                         <span>07</span>
                     </div>
-                    <h3 id="stat-discount">0 ₫</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <h3 id="stat-discount">0 â‚«</h3>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
 
                 <article class="finance-card">
                     <div class="finance-head">
-                        <p>Hạn cần chú ý</p>
+                        <p>Háº¡n cáº§n chÃº Ã½</p>
                         <span>08</span>
                     </div>
                     <h3 id="stat-nearest-due">-</h3>
-                    <a class="finance-link" href="#invoice-section">Chi tiết</a>
+                    <a class="finance-link" href="#invoice-section">Chi tiáº¿t</a>
                 </article>
             </section>
 
             <section class="section card">
                 <div class="section-head">
-                    <h3>Hồ sơ sinh viên</h3>
-                    <span id="profile-status" class="badge warn">Đang tải dữ liệu</span>
+                    <h3>Há»“ sÆ¡ sinh viÃªn</h3>
+                    <span id="profile-status" class="badge warn">Äang táº£i dá»¯ liá»‡u</span>
                 </div>
 
                 <div class="profile-grid">
                     <article class="profile-item">
-                        <p>Mã sinh viên</p>
+                        <p>MÃ£ sinh viÃªn</p>
                         <h4 id="profile-ma-sv">-</h4>
                     </article>
                     <article class="profile-item">
-                        <p>Họ và tên</p>
+                        <p>Há» vÃ  tÃªn</p>
                         <h4 id="profile-ho-ten">-</h4>
                     </article>
                     <article class="profile-item">
@@ -133,7 +133,7 @@
                         <h4 id="profile-email">-</h4>
                     </article>
                     <article class="profile-item">
-                        <p>Loại sinh viên</p>
+                        <p>Loáº¡i sinh viÃªn</p>
                         <h4 id="profile-loai">-</h4>
                     </article>
                 </div>
@@ -141,30 +141,30 @@
 
             <section id="registration-section" class="section card">
                 <div class="section-head registration-head">
-                    <h3>Môn học đã đăng ký</h3>
+                    <h3>MÃ´n há»c Ä‘Ã£ Ä‘Äƒng kÃ½</h3>
                     <div class="registration-tools">
-                        <input id="reg-ma-hoc-ky" class="input" placeholder="Lọc mã học kỳ" />
+                        <input id="reg-ma-hoc-ky" class="input" placeholder="Lá»c mÃ£ há»c ká»³" />
                         <select id="reg-loai-sv" class="select">
-                            <option value="ChinhQuy">Chính quy</option>
-                            <option value="LienThong">Liên thông</option>
-                            <option value="VanBang2">Văn bằng 2</option>
+                            <option value="ChinhQuy">ChÃ­nh quy</option>
+                            <option value="LienThong">LiÃªn thÃ´ng</option>
+                            <option value="VanBang2">VÄƒn báº±ng 2</option>
                         </select>
-                        <button id="reg-load" class="btn btn-ghost" type="button">Tải danh sách</button>
+                        <button id="reg-load" class="btn btn-ghost" type="button">Táº£i danh sÃ¡ch</button>
                     </div>
                 </div>
 
                 <div class="registration-summary">
                     <article class="registration-item">
-                        <p>Số môn đã đăng ký</p>
+                        <p>Sá»‘ mÃ´n Ä‘Ã£ Ä‘Äƒng kÃ½</p>
                         <h4 id="reg-total-course">0</h4>
                     </article>
                     <article class="registration-item">
-                        <p>Tổng tín chỉ</p>
+                        <p>Tá»•ng tÃ­n chá»‰</p>
                         <h4 id="reg-total-credit">0</h4>
                     </article>
                     <article class="registration-item">
-                        <p>Học phí dự kiến</p>
-                        <h4 id="reg-total-fee">0 ₫</h4>
+                        <p>Há»c phÃ­ dá»± kiáº¿n</p>
+                        <h4 id="reg-total-fee">0 â‚«</h4>
                     </article>
                 </div>
 
@@ -172,19 +172,19 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Mã đăng ký</th>
-                                <th>Mã môn học</th>
-                                <th>Tên môn học</th>
-                                <th>Học kỳ</th>
-                                <th>Tín chỉ</th>
-                                <th>Giá tín chỉ</th>
-                                <th>Học phí dự kiến</th>
-                                <th>Trạng thái</th>
+                                <th>MÃ£ Ä‘Äƒng kÃ½</th>
+                                <th>MÃ£ mÃ´n há»c</th>
+                                <th>TÃªn mÃ´n há»c</th>
+                                <th>Há»c ká»³</th>
+                                <th>TÃ­n chá»‰</th>
+                                <th>GiÃ¡ tÃ­n chá»‰</th>
+                                <th>Há»c phÃ­ dá»± kiáº¿n</th>
+                                <th>Tráº¡ng thÃ¡i</th>
                             </tr>
                         </thead>
                         <tbody id="registration-body">
                             <tr>
-                                <td colspan="8" class="empty">Đang tải danh sách đăng ký...</td>
+                                <td colspan="8" class="empty">Äang táº£i danh sÃ¡ch Ä‘Äƒng kÃ½...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -193,27 +193,27 @@
 
             <section id="invoice-section" class="section card">
                 <div class="section-head">
-                    <h3>Danh sách hóa đơn học phí</h3>
-                    <a class="btn btn-ghost" href="./history.html">Xem lịch sử thanh toán</a>
+                    <h3>Danh sÃ¡ch hÃ³a Ä‘Æ¡n há»c phÃ­</h3>
+                    <a class="btn btn-ghost" href="./history.html">Xem lá»‹ch sá»­ thanh toÃ¡n</a>
                 </div>
 
                 <div class="table-wrap">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Mã hóa đơn</th>
-                                <th>Học kỳ</th>
-                                <th>Tổng tiền</th>
-                                <th>Đã nộp</th>
-                                <th>Còn nợ</th>
-                                <th>Hạn thanh toán</th>
-                                <th>Trạng thái</th>
-                                <th>Thao tác</th>
+                                <th>MÃ£ hÃ³a Ä‘Æ¡n</th>
+                                <th>Há»c ká»³</th>
+                                <th>Tá»•ng tiá»n</th>
+                                <th>ÄÃ£ ná»™p</th>
+                                <th>CÃ²n ná»£</th>
+                                <th>Háº¡n thanh toÃ¡n</th>
+                                <th>Tráº¡ng thÃ¡i</th>
+                                <th>Thao tÃ¡c</th>
                             </tr>
                         </thead>
                         <tbody id="invoice-body">
                             <tr>
-                                <td colspan="8" class="empty">Đang tải dữ liệu hóa đơn...</td>
+                                <td colspan="8" class="empty">Äang táº£i dá»¯ liá»‡u hÃ³a Ä‘Æ¡n...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -226,8 +226,8 @@
         <div class="modal-card">
             <div class="form-card payment-form-card">
                 <div class="form-header">
-                    <h4>Thanh toán MoMo</h4>
-                    <p class="muted payment-modal-hint">Nhập số tiền cần nộp, hệ thống sẽ chuyển bạn đến cổng MoMo.</p>
+                    <h4>Thanh toÃ¡n MoMo</h4>
+                    <p class="muted payment-modal-hint">Nháº­p sá»‘ tiá»n cáº§n ná»™p, há»‡ thá»‘ng sáº½ chuyá»ƒn báº¡n Ä‘áº¿n cá»•ng MoMo.</p>
                 </div>
 
                 <form id="payment-form">
@@ -235,19 +235,19 @@
 
                     <div class="form-body">
                         <div class="form-field">
-                            <label>Số tiền nộp</label>
+                            <label>Sá»‘ tiá»n ná»™p</label>
                             <input id="pay-so-tien" class="input" type="number" min="1000" required />
                         </div>
 
                         <div class="form-field">
-                            <label>Ghi chú</label>
-                            <textarea id="pay-ghi-chu" class="textarea" placeholder="Tùy chọn"></textarea>
+                            <label>Ghi chÃº</label>
+                            <textarea id="pay-ghi-chu" class="textarea" placeholder="TÃ¹y chá»n"></textarea>
                         </div>
                     </div>
 
                     <div class="form-footer">
-                        <button type="button" id="pay-cancel" class="btn btn-ghost">Hủy</button>
-                        <button type="submit" id="pay-submit" class="btn btn-primary">Thanh toán với MoMo</button>
+                        <button type="button" id="pay-cancel" class="btn btn-ghost">Há»§y</button>
+                        <button type="submit" id="pay-submit" class="btn btn-primary">Thanh toÃ¡n vá»›i MoMo</button>
                     </div>
                 </form>
             </div>

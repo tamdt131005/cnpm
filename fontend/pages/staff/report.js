@@ -1,9 +1,9 @@
-(function initStaffReport() {
+﻿(function initStaffReport() {
     const PAYMENT_METHOD_LABELS = {
-        TienMat: 'Tiền mặt',
-        ChuyenKhoan: 'Chuyển khoản',
-        The: 'Thẻ',
-        ViDienTu: 'Ví điện tử'
+        TienMat: 'Tien mat',
+        ChuyenKhoan: 'Chuyen khoan',
+        The: 'The',
+        ViDienTu: 'Vi dien tu'
     };
 
     let session = null;
@@ -43,12 +43,209 @@
         summaryBody: null,
         orgKhoaBody: null,
         orgNganhBody: null,
-        orgLopBody: null,
-        exportButtons: []
+        orgLopBody: null
     };
 
     function numberValue(value) {
         return Number(value || 0);
+    }
+
+    function buildSelectOptions(items, valueKey, labelBuilder, emptyText, firstOptionLabel = 'Chọn mã') {
+        if (!items.length) {
+            return `<option value="">${emptyText}</option>`;
+        }
+
+        return [
+            `<option value="">${firstOptionLabel}</option>`,
+            ...items.map((item) => `<option value="${item[valueKey]}">${labelBuilder(item)}</option>`)
+        ].join('');
+    }
+
+    async function loadReportFormOptions() {
+        const invoiceHocKySelect = refs.invoiceForm?.maHocKy;
+        const registrationHocKySelect = refs.registrationMaHocKy;
+        const filterHocKySelect = refs.filterMaHocKy;
+        const summaryNamHocSelect = refs.summaryMaNamHoc;
+        const allSelects = [
+            invoiceHocKySelect,
+            registrationHocKySelect,
+            filterHocKySelect,
+            summaryNamHocSelect
+        ].filter(Boolean);
+
+        if (!allSelects.length) {
+            return;
+        }
+
+        const prevInvoiceHocKy = invoiceHocKySelect?.value || '';
+        const prevRegistrationHocKy = registrationHocKySelect?.value || '';
+        const prevFilterHocKy = filterHocKySelect?.value || '';
+        const prevSummaryNamHoc = summaryNamHocSelect?.value || '';
+
+        allSelects.forEach((select) => {
+            select.disabled = true;
+        });
+
+        try {
+            const response = await api.get(`/staff/fee-rate-options?maNguoiDung=${session.maNguoiDung}`);
+            if (!response?.success || !response?.data) {
+                throw new Error(response?.message || 'Không thể tải danh sách học kỳ');
+            }
+
+            const hocKy = Array.isArray(response.data.hocKy) ? response.data.hocKy : [];
+            const namHocMap = new Map();
+
+            hocKy.forEach((item) => {
+                const key = item.maNamHoc;
+                if (!key || namHocMap.has(key)) {
+                    return;
+                }
+
+                namHocMap.set(key, {
+                    maNamHoc: key
+                });
+            });
+
+            const namHoc = Array.from(namHocMap.values()).sort((a, b) =>
+                String(b.maNamHoc).localeCompare(String(a.maNamHoc))
+            );
+
+            if (invoiceHocKySelect) {
+                invoiceHocKySelect.innerHTML = buildSelectOptions(
+                    hocKy,
+                    'maHocKy',
+                    (item) => {
+                        const tenHocKy = item.tenHocKy ? ` - ${item.tenHocKy}` : '';
+                        const namHocLabel = item.maNamHoc ? ` (${item.maNamHoc})` : '';
+                        return `${item.maHocKy}${tenHocKy}${namHocLabel}`;
+                    },
+                    'Không có dữ liệu học kỳ',
+                    'Chọn mã học kỳ'
+                );
+
+                if (prevInvoiceHocKy && hocKy.some((item) => item.maHocKy === prevInvoiceHocKy)) {
+                    invoiceHocKySelect.value = prevInvoiceHocKy;
+                }
+            }
+
+            if (registrationHocKySelect) {
+                registrationHocKySelect.innerHTML = buildSelectOptions(
+                    hocKy,
+                    'maHocKy',
+                    (item) => {
+                        const tenHocKy = item.tenHocKy ? ` - ${item.tenHocKy}` : '';
+                        return `${item.maHocKy}${tenHocKy}`;
+                    },
+                    'Không có dữ liệu học kỳ',
+                    'Tất cả học kỳ'
+                );
+
+                if (prevRegistrationHocKy && hocKy.some((item) => item.maHocKy === prevRegistrationHocKy)) {
+                    registrationHocKySelect.value = prevRegistrationHocKy;
+                }
+            }
+
+            if (filterHocKySelect) {
+                filterHocKySelect.innerHTML = buildSelectOptions(
+                    hocKy,
+                    'maHocKy',
+                    (item) => {
+                        const tenHocKy = item.tenHocKy ? ` - ${item.tenHocKy}` : '';
+                        return `${item.maHocKy}${tenHocKy}`;
+                    },
+                    'Không có dữ liệu học kỳ',
+                    'Tất cả học kỳ'
+                );
+
+                if (prevFilterHocKy && hocKy.some((item) => item.maHocKy === prevFilterHocKy)) {
+                    filterHocKySelect.value = prevFilterHocKy;
+                }
+            }
+
+            if (summaryNamHocSelect) {
+                summaryNamHocSelect.innerHTML = buildSelectOptions(
+                    namHoc,
+                    'maNamHoc',
+                    (item) => item.maNamHoc,
+                    'Không có dữ liệu năm học',
+                    'Tất cả năm học'
+                );
+
+                if (prevSummaryNamHoc && namHoc.some((item) => item.maNamHoc === prevSummaryNamHoc)) {
+                    summaryNamHocSelect.value = prevSummaryNamHoc;
+                }
+            }
+        } finally {
+            allSelects.forEach((select) => {
+                select.disabled = false;
+            });
+        }
+    }
+
+    function renderStudentFilterOptions(items) {
+        const studentSelect = refs.filterMaSV;
+        if (!studentSelect) {
+            return;
+        }
+
+        const currentValue = studentSelect.value;
+        const studentMap = new Map();
+
+        (Array.isArray(items) ? items : []).forEach((item) => {
+            if (!item?.maSV || studentMap.has(item.maSV)) {
+                return;
+            }
+
+            studentMap.set(item.maSV, {
+                maSV: item.maSV,
+                hoTen: item.hoTen || ''
+            });
+        });
+
+        const students = Array.from(studentMap.values()).sort((a, b) =>
+            String(a.maSV).localeCompare(String(b.maSV))
+        );
+
+        studentSelect.innerHTML = [
+            '<option value="">Tất cả sinh viên</option>',
+            ...students.map((item) => `<option value="${item.maSV}">${item.maSV} - ${item.hoTen || '-'}</option>`)
+        ].join('');
+
+        if (currentValue && students.some((item) => item.maSV === currentValue)) {
+            studentSelect.value = currentValue;
+        }
+
+        studentSelect.disabled = false;
+    }
+
+    function renderManualPaymentInvoiceOptions() {
+        const invoiceSelect = refs.manualPaymentForm?.maHoaDon;
+        if (!invoiceSelect) {
+            return;
+        }
+
+        const currentValue = invoiceSelect.value;
+        const debtInvoices = invoiceRows.filter((item) => numberValue(item.conNo) > 0);
+
+        if (!debtInvoices.length) {
+            invoiceSelect.innerHTML = '<option value="">Không có hóa đơn còn nợ</option>';
+            invoiceSelect.disabled = true;
+            return;
+        }
+
+        invoiceSelect.innerHTML = [
+            '<option value="">Chọn mã hóa đơn</option>',
+            ...debtInvoices.map(
+                (item) =>
+                    `<option value="${item.maHoaDon}">${item.maHoaDon} - ${item.maSV || '-'} - ${AppShell.formatCurrency(item.conNo)}</option>`
+            )
+        ].join('');
+
+        if (currentValue && debtInvoices.some((item) => item.maHoaDon === currentValue)) {
+            invoiceSelect.value = currentValue;
+        }
+
+        invoiceSelect.disabled = false;
     }
 
     function isOverdue(item) {
@@ -62,14 +259,14 @@
 
     function statusBadge(item) {
         if (isOverdue(item)) {
-            return '<span class="badge danger">Quá hạn</span>';
+            return '<span class="badge danger">Qua han</span>';
         }
 
         if (numberValue(item.conNo) > 0) {
-            return '<span class="badge warn">Còn nợ</span>';
+            return '<span class="badge warn">Con no</span>';
         }
 
-        return '<span class="badge success">Đã thu đủ</span>';
+        return '<span class="badge success">Da thu du</span>';
     }
 
     function computeDebtStats(items) {
@@ -109,7 +306,7 @@
 
     function renderDebtRows(items) {
         if (!items.length) {
-            refs.debtBody.innerHTML = '<tr><td colspan="10" class="empty">Không có dữ liệu công nợ đang mở.</td></tr>';
+            refs.debtBody.innerHTML = '<tr><td colspan="10" class="empty">Không có dữ liệu cong no dang mo.</td></tr>';
             renderDebtStats(computeDebtStats(items));
             return;
         }
@@ -157,11 +354,12 @@
         const response = await api.get(`/staff/debts?${buildQuery().toString()}`);
 
         if (!response?.success || !Array.isArray(response?.data)) {
-            throw new Error(response?.message || 'Không thể tải dữ liệu công nợ');
+            throw new Error(response?.message || 'Không thể tai dữ liệu cong no');
         }
 
         debts = response.data;
         renderDebtRows(debts);
+        renderStudentFilterOptions(debts);
     }
 
     function studentTypeLabel(type) {
@@ -184,7 +382,7 @@
 
         if (!rows.length) {
             refs.registrationBody.innerHTML =
-                '<tr><td colspan="11" class="empty">Không có dữ liệu đăng ký học theo điều kiện lọc.</td></tr>';
+                '<tr><td colspan="11" class="empty">Không có dữ liệu đăng ký hoc theo dieu kien loc.</td></tr>';
             return;
         }
 
@@ -220,7 +418,7 @@
         );
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Không thể tải danh sách đăng ký học');
+            throw new Error(response?.message || 'Không thể Tải danh sách đăng ký hoc');
         }
 
         renderRegistrationRows(response.data);
@@ -228,24 +426,24 @@
 
     function invoiceStatusFromItem(item) {
         if (numberValue(item.conNo) <= 0) {
-            return '<span class="badge success">Đã thanh toán</span>';
+            return '<span class="badge success">Da thanh toán</span>';
         }
 
         if (isOverdue(item)) {
-            return '<span class="badge danger">Quá hạn</span>';
+            return '<span class="badge danger">Qua han</span>';
         }
 
         if (numberValue(item.daNop) > 0) {
-            return '<span class="badge warn">Thanh toán một phần</span>';
+            return '<span class="badge warn">thanh toán mot phan</span>';
         }
 
-        return '<span class="badge warn">Chưa thanh toán</span>';
+        return '<span class="badge warn">Chua thanh toán</span>';
     }
 
     function renderInvoiceRows(items) {
         if (!items.length) {
             refs.invoiceManageBody.innerHTML =
-                '<tr><td colspan="12" class="empty">Không tìm thấy hóa đơn theo điều kiện lọc.</td></tr>';
+                '<tr><td colspan="12" class="empty">Không tìm thấy hóa đơn theo dieu kien loc.</td></tr>';
             return;
         }
 
@@ -289,17 +487,18 @@
         );
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Không thể tải danh sách hóa đơn');
+            throw new Error(response?.message || 'Không thể Tải danh sách hóa đơn');
         }
 
         invoiceRows = Array.isArray(response.data.danhSach) ? response.data.danhSach : [];
         renderInvoiceRows(invoiceRows);
+        renderManualPaymentInvoiceOptions();
     }
 
     function renderPaymentRows(items) {
         if (!items.length) {
             refs.paymentHistoryBody.innerHTML =
-                '<tr><td colspan="7" class="empty">Không có giao dịch thanh toán phù hợp.</td></tr>';
+                '<tr><td colspan="7" class="empty">Không có giao dịch thanh toán phu hop.</td></tr>';
             return;
         }
 
@@ -331,7 +530,7 @@
         );
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Không thể tải lịch sử thanh toán');
+            throw new Error(response?.message || 'Không thể tai lịch sử thanh toán');
         }
 
         const rows = Array.isArray(response.data.danhSach) ? response.data.danhSach : [];
@@ -345,7 +544,7 @@
 
         const rows = Array.isArray(data?.danhSach) ? data.danhSach : [];
         if (!rows.length) {
-            refs.summaryBody.innerHTML = '<tr><td colspan="5" class="empty">Chưa có dữ liệu tổng hợp.</td></tr>';
+            refs.summaryBody.innerHTML = '<tr><td colspan="5" class="empty">Chua co dữ liệu Tổng hợp.</td></tr>';
             return;
         }
 
@@ -374,7 +573,7 @@
         );
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Không thể tải báo cáo tổng hợp');
+            throw new Error(response?.message || 'Không thể tai báo cáo Tổng hợp');
         }
 
         renderSummary(response.data);
@@ -404,43 +603,12 @@
         const response = await api.get(`/staff/reports/debt-org?${buildQuery().toString()}`);
 
         if (!response?.success || !response?.data) {
-            throw new Error(response?.message || 'Không thể tải báo cáo công nợ theo đơn vị');
+            throw new Error(response?.message || 'Không thể tai báo cáo cong no theo don vi');
         }
 
         renderOrgRows(refs.orgKhoaBody, Array.isArray(response.data.byKhoa) ? response.data.byKhoa : [], 'maKhoa');
         renderOrgRows(refs.orgNganhBody, Array.isArray(response.data.byNganh) ? response.data.byNganh : [], 'maNganh');
         renderOrgRows(refs.orgLopBody, Array.isArray(response.data.byLop) ? response.data.byLop : [], 'maLop');
-    }
-
-    async function exportReport(type, format) {
-        const response = await api.download(
-            `/staff/reports/export?${
-                buildQuery({
-                    type,
-                    format,
-                    maNamHoc: refs.summaryMaNamHoc.value
-                }).toString()
-            }`
-        );
-
-        if (!response?.success || !response?.blob) {
-            AppShell.showToast(response?.message || 'Không thể xuất báo cáo', 'error');
-            return;
-        }
-
-        const defaultName = `${type}_${Date.now()}.${format === 'excel' ? 'csv' : 'html'}`;
-        const fileName = response.fileName || defaultName;
-        const blobUrl = URL.createObjectURL(response.blob);
-
-        const anchor = document.createElement('a');
-        anchor.href = blobUrl;
-        anchor.download = fileName;
-        document.body.appendChild(anchor);
-        anchor.click();
-        anchor.remove();
-
-        URL.revokeObjectURL(blobUrl);
-        AppShell.showToast('Đã tải báo cáo xuống máy', 'info');
     }
 
     function wireGenerateInvoiceForm() {
@@ -456,7 +624,7 @@
             };
 
             if (!payload.maHocKy || !payload.hanThanhToan || payload.soTienMienGiamMacDinh < 0) {
-                AppShell.showToast('Vui lòng nhập thông tin hợp lệ để tạo hóa đơn', 'error');
+                AppShell.showToast('Vui lòng nhap Thông tin hợp lệ de tao hóa đơn', 'error');
                 return;
             }
 
@@ -467,13 +635,13 @@
                 const response = await api.post('/staff/generate-invoices', payload);
 
                 if (!response?.success) {
-                    AppShell.showToast(response?.message || 'Không thể tạo hóa đơn', 'error');
+                    AppShell.showToast(response?.message || 'Không thể tao hóa đơn', 'error');
                     return;
                 }
 
                 const summary = response.data || {};
                 AppShell.showToast(
-                    `Đã tạo ${summary.daTao || 0} hóa đơn, bỏ qua ${summary.boQuaDaTonTai || 0} đã tồn tại`,
+                    `Da tao ${summary.daTao || 0} hóa đơn, bỏ qua ${summary.boQuaDaTonTai || 0} da ton tai`,
                     'info'
                 );
 
@@ -482,7 +650,7 @@
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             } finally {
                 refs.invoiceSubmit.disabled = false;
-                refs.invoiceSubmit.textContent = 'Tạo hóa đơn';
+                refs.invoiceSubmit.textContent = 'Tao hóa đơn';
             }
         });
     }
@@ -535,7 +703,7 @@
 
             const item = invoiceRows.find((invoice) => invoice.maHoaDon === maHoaDon);
             const currentDiscount = numberValue(item?.soTienMienGiam);
-            const rawValue = window.prompt('Nhập số tiền miễn giảm mới', String(currentDiscount));
+            const rawValue = window.prompt('Nhap so tien miễn giảm moi', String(currentDiscount));
 
             if (rawValue === null) {
                 return;
@@ -543,7 +711,7 @@
 
             const soTienMienGiam = Number(rawValue);
             if (!Number.isFinite(soTienMienGiam) || soTienMienGiam < 0) {
-                AppShell.showToast('Số tiền miễn giảm không hợp lệ', 'error');
+                AppShell.showToast('So tien miễn giảm khong hợp lệ', 'error');
                 return;
             }
 
@@ -554,11 +722,11 @@
                 });
 
                 if (!response?.success) {
-                    AppShell.showToast(response?.message || 'Không thể cập nhật miễn giảm', 'error');
+                    AppShell.showToast(response?.message || 'Không thể Cập nhật miễn giảm', 'error');
                     return;
                 }
 
-                AppShell.showToast('Cập nhật miễn giảm thành công', 'info');
+                AppShell.showToast('Cập nhật miễn giảm thanh cong', 'info');
                 await Promise.all([loadInvoices(), loadDebts(), loadDebtByOrg()]);
             } catch (error) {
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
@@ -579,7 +747,7 @@
             };
 
             if (!payload.maHoaDon || payload.soTienTT <= 0) {
-                AppShell.showToast('Vui lòng nhập mã hóa đơn và số tiền hợp lệ', 'error');
+                AppShell.showToast('Vui lòng nhap ma hóa đơn va so tien hợp lệ', 'error');
                 return;
             }
 
@@ -590,11 +758,11 @@
                 const response = await api.post('/staff/payments', payload);
 
                 if (!response?.success) {
-                    AppShell.showToast(response?.message || 'Không thể ghi nhận thanh toán', 'error');
+                    AppShell.showToast(response?.message || 'Không thể ghi nhan thanh toán', 'error');
                     return;
                 }
 
-                AppShell.showToast('Ghi nhận thanh toán thành công', 'info');
+                AppShell.showToast('Ghi nhan thanh toán thanh cong', 'info');
                 refs.manualPaymentForm.reset();
 
                 await Promise.all([loadDebts(), loadInvoices(), loadPaymentHistory(), loadSummary(), loadDebtByOrg()]);
@@ -602,7 +770,7 @@
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             } finally {
                 refs.paymentSubmit.disabled = false;
-                refs.paymentSubmit.textContent = 'Ghi nhận thanh toán';
+                refs.paymentSubmit.textContent = 'Ghi nhan thanh toán';
             }
         });
 
@@ -622,23 +790,6 @@
             } catch (error) {
                 AppShell.showToast(AppShell.resolveApiError(error), 'error');
             }
-        });
-
-        refs.exportButtons.forEach((button) => {
-            button.addEventListener('click', async () => {
-                const token = button.dataset.export || '';
-                const [type, format] = token.split(':');
-
-                if (!type || !format) {
-                    return;
-                }
-
-                try {
-                    await exportReport(type, format);
-                } catch (error) {
-                    AppShell.showToast(AppShell.resolveApiError(error), 'error');
-                }
-            });
         });
     }
 
@@ -679,7 +830,6 @@
         refs.orgKhoaBody = document.getElementById('org-khoa-body');
         refs.orgNganhBody = document.getElementById('org-nganh-body');
         refs.orgLopBody = document.getElementById('org-lop-body');
-        refs.exportButtons = Array.from(document.querySelectorAll('[data-export]'));
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -697,6 +847,12 @@
         wireSummaryControls();
 
         try {
+            await loadReportFormOptions();
+        } catch (error) {
+            AppShell.showToast(AppShell.resolveApiError(error), 'error');
+        }
+
+        try {
             await Promise.all([
                 loadDebts(),
                 loadRegistrations(),
@@ -706,12 +862,13 @@
                 loadDebtByOrg()
             ]);
         } catch (error) {
-            refs.debtBody.innerHTML = '<tr><td colspan="10" class="empty">Không thể tải báo cáo công nợ.</td></tr>';
-            refs.registrationBody.innerHTML = '<tr><td colspan="11" class="empty">Không thể tải đăng ký học kỳ.</td></tr>';
-            refs.invoiceManageBody.innerHTML = '<tr><td colspan="12" class="empty">Không thể tải danh sách hóa đơn.</td></tr>';
-            refs.paymentHistoryBody.innerHTML = '<tr><td colspan="7" class="empty">Không thể tải lịch sử thanh toán.</td></tr>';
-            refs.summaryBody.innerHTML = '<tr><td colspan="5" class="empty">Không thể tải báo cáo tổng hợp.</td></tr>';
+            refs.debtBody.innerHTML = '<tr><td colspan="10" class="empty">Không thể tai báo cáo cong no.</td></tr>';
+            refs.registrationBody.innerHTML = '<tr><td colspan="11" class="empty">Không thể tai đăng ký Học kỳ.</td></tr>';
+            refs.invoiceManageBody.innerHTML = '<tr><td colspan="12" class="empty">Không thể Tải danh sách hóa đơn.</td></tr>';
+            refs.paymentHistoryBody.innerHTML = '<tr><td colspan="7" class="empty">Không thể tai lịch sử thanh toán.</td></tr>';
+            refs.summaryBody.innerHTML = '<tr><td colspan="5" class="empty">Không thể tai báo cáo Tổng hợp.</td></tr>';
             AppShell.showToast(AppShell.resolveApiError(error), 'error');
         }
     });
 })();
+

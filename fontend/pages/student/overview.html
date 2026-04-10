@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tong quan sinh vien</title>
+    <title>Tổng quan Sinh viên</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,33 +17,33 @@
         <student-sidebar></student-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Tong quan sinh vien" subtitle="Buc tranh nhanh hoc phi va cong no ca nhan"></app-topbar>
+            <app-topbar title="Tổng quan Sinh viên" subtitle="Buc tranh nhanh Học phí va công nợ ca nhan"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Sinh vien / Tong quan</p>
+                <p class="breadcrumb">Sinh viên / Tổng quan</p>
                 <div class="overview-actions">
-                    <a class="btn btn-ghost" href="./invoices.html">Hoa don hoc phi</a>
-                    <a class="btn btn-ghost" href="./registrations.html">Mon hoc dang ky</a>
-                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                    <a class="btn btn-ghost" href="./invoices.html">hóa đơn Học phí</a>
+                    <a class="btn btn-ghost" href="./registrations.html">Môn học đăng ký</a>
+                    <a class="btn btn-ghost" href="./history.html">lịch sử thanh toán</a>
                 </div>
             </section>
 
             <section class="card overview-hero">
                 <div class="overview-hero-copy">
                     <span class="kicker">Student Finance Hub</span>
-                    <h3 id="profile-greeting">Xin chao, sinh vien</h3>
+                    <h3 id="profile-greeting">Xin chao, Sinh viên</h3>
                     <p>
-                        Theo doi cong no hoc phi theo phong cach dashboard gon gon, xu ly nhanh nhung khoan can thanh toan va dieu huong
-                        den tung chuc nang chi tiet.
+                        Theo doi công nợ Học phí theo phong cach dashboard gon gon, xu ly nhanh nhung khoan can thanh toán va dieu huong
+                        den tung chuc nang chi tiết.
                     </p>
                 </div>
                 <div class="overview-hero-meta">
                     <article class="overview-meta-item">
-                        <p>Trang thai tai khoan</p>
-                        <h4 id="profile-status-text">Dang tai...</h4>
+                        <p>Trạng thái Tài khoản</p>
+                        <h4 id="profile-status-text">Đang tải...</h4>
                     </article>
                     <article class="overview-meta-item">
-                        <p>Han thanh toan gan nhat</p>
+                        <p>Hạn thanh toán gan nhat</p>
                         <h4 id="stat-nearest-due">-</h4>
                     </article>
                 </div>
@@ -51,36 +51,36 @@
 
             <section class="stat-grid">
                 <article class="stat-card">
-                    <p>Tong so hoa don</p>
+                    <p>Tổng Số hóa đơn</p>
                     <h3 id="stat-total-invoice">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Hoa don con no</p>
+                    <p>hóa đơn Còn nợ</p>
                     <h3 id="stat-debt">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tong cong no</p>
+                    <p>Tổng công nợ</p>
                     <h3 id="stat-debt-amount">0 VND</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tong da nop</p>
+                    <p>Tổng Đã nộp</p>
                     <h3 id="stat-paid-amount">0 VND</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Hoa don qua han</p>
+                    <p>hóa đơn quá hạn</p>
                     <h3 id="stat-overdue">0</h3>
                 </article>
             </section>
 
             <section class="section card">
                 <div class="section-head">
-                    <h3>Ho so sinh vien</h3>
-                    <span id="profile-status" class="badge warn">Dang tai du lieu</span>
+                    <h3>Ho Số Sinh viên</h3>
+                    <span id="profile-status" class="badge warn">Đang tải dữ liệu</span>
                 </div>
 
                 <div class="profile-grid">
                     <article class="profile-item">
-                        <p>Ma sinh vien</p>
+                        <p>Mã Sinh viên</p>
                         <h4 id="profile-ma-sv">-</h4>
                     </article>
                     <article class="profile-item">
@@ -92,7 +92,7 @@
                         <h4 id="profile-email">-</h4>
                     </article>
                     <article class="profile-item">
-                        <p>Loai sinh vien</p>
+                        <p>Loai Sinh viên</p>
                         <h4 id="profile-loai">-</h4>
                     </article>
                 </div>
@@ -101,19 +101,19 @@
             <section class="section">
                 <div class="quick-grid">
                     <article class="quick-card">
-                        <h4>Quan ly hoa don</h4>
-                        <p>Xem danh sach hoa don, cong no va thanh toan MoMo theo tung khoan can xu ly.</p>
-                        <a class="btn btn-primary" href="./invoices.html">Mo trang hoa don</a>
+                        <h4>Quản lý hóa đơn</h4>
+                        <p>Xem Danh sách hóa đơn, công nợ va thanh toán MoMở theo tung khoan can xu ly.</p>
+                        <a class="btn btn-primary" href="./invoices.html">Mở trang hóa đơn</a>
                     </article>
                     <article class="quick-card">
-                        <h4>Mon hoc dang ky</h4>
-                        <p>Loc theo hoc ky, loai sinh vien va kiem tra hoc phi du kien theo tung mon hoc.</p>
-                        <a class="btn btn-accent" href="./registrations.html">Mo trang dang ky</a>
+                        <h4>Môn học đăng ký</h4>
+                        <p>Loc theo Học kỳ, loai Sinh viên va kiem tra Học phí dự kiến theo tung Môn học.</p>
+                        <a class="btn btn-accent" href="./registrations.html">Mở trang đăng ký</a>
                     </article>
                     <article class="quick-card">
-                        <h4>Lich su giao dich</h4>
-                        <p>Tra cuu cac lan thanh toan da phat sinh va thong tin giao dich gan day.</p>
-                        <a class="btn btn-ghost" href="./history.html">Xem lich su</a>
+                        <h4>lịch sử giao dịch</h4>
+                        <p>Tra cuu cac lan thanh toán da phát sinh va Thông tin giao dịch gan day.</p>
+                        <a class="btn btn-ghost" href="./history.html">Xem lịch sử</a>
                     </article>
                 </div>
             </section>
@@ -127,3 +127,5 @@
 </body>
 
 </html>
+
+

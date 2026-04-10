@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hub danh muc</title>
+    <title>Hub Danh mục</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,71 +17,71 @@
         <admin-sidebar></admin-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Hub danh muc" subtitle="Chia nho danh muc dao tao theo nhom nghiep vu"></app-topbar>
+            <app-topbar title="Hub Danh mục" subtitle="Chia nhỏ danh mục đào tạo theo nhóm nghiệp vụ"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Admin / Danh muc / Hub</p>
+                <p class="breadcrumb">Admin / Danh mục / Hub</p>
                 <div class="catalog-hub-actions">
                     <a class="btn btn-ghost" href="./dashboard.html">Dashboard</a>
-                    <a class="btn btn-ghost" href="./catalog.html">Man hinh chi tiet tong hop</a>
+                    <a class="btn btn-ghost" href="./catalog.html">Màn hình chi tiết tổng hợp</a>
                 </div>
             </section>
 
             <section class="catalog-grid">
                 <article class="catalog-card">
-                    <span class="kicker">Dao tao co so</span>
+                    <span class="kicker">Đào tạo cơ sở</span>
                     <h4>Khoa</h4>
-                    <p>Quan ly ma khoa, ten khoa va truong khoa theo cau truc to chuc.</p>
+                    <p>Quản lý mã khoa, tên khoa và trưởng khoa theo cấu trúc tổ chức.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=khoa</p>
-                    <a class="btn btn-primary" href="./catalog.html?resource=khoa">Mo danh muc Khoa</a>
+                    <a class="btn btn-primary" href="./catalog.html?resource=khoa">Mở Danh mục Khoa</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Dao tao co so</span>
-                    <h4>Nganh</h4>
-                    <p>Danh muc nganh dao tao gan voi khoa, phuc vu phan bo lop va mon hoc.</p>
+                    <span class="kicker">Đào tạo cơ sở</span>
+                    <h4>Ngành</h4>
+                    <p>Danh mục ngành đào tạo gắn với khoa, phục vụ phân bổ lớp và môn học.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=nganh</p>
-                    <a class="btn btn-primary" href="./catalog.html?resource=nganh">Mo danh muc Nganh</a>
+                    <a class="btn btn-primary" href="./catalog.html?resource=nganh">Mở Danh mục Ngành</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Dao tao co so</span>
-                    <h4>Lop</h4>
-                    <p>Quan ly lop hoc theo nien khoa va nganh de lien ket sinh vien.</p>
+                    <span class="kicker">Đào tạo cơ sở</span>
+                    <h4>Lớp</h4>
+                    <p>Quản lý lớp học theo niên khóa và ngành để liên kết sinh viên.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=lop</p>
-                    <a class="btn btn-primary" href="./catalog.html?resource=lop">Mo danh muc Lop</a>
+                    <a class="btn btn-primary" href="./catalog.html?resource=lop">Mở Danh mục Lớp</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Mon hoc</span>
-                    <h4>Mon hoc</h4>
-                    <p>Cap nhat ma mon, ten mon, so tin chi va khoa quan ly mon hoc.</p>
+                    <span class="kicker">Môn học</span>
+                    <h4>Môn học</h4>
+                    <p>Cập nhật mã môn, tên môn, số tín chỉ và khoa quản lý môn học.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=monhoc</p>
-                    <a class="btn btn-accent" href="./catalog.html?resource=monhoc">Mo danh muc Mon hoc</a>
+                    <a class="btn btn-accent" href="./catalog.html?resource=monhoc">Mở Danh mục Môn học</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Nguoi hoc</span>
-                    <h4>Sinh vien</h4>
-                    <p>Cap nhat thong tin sinh vien va gan vao lop phu hop trong he thong.</p>
+                    <span class="kicker">Người học</span>
+                    <h4>Sinh viên</h4>
+                    <p>Cập nhật thông tin sinh viên và gán vào lớp phù hợp trong hệ thống.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=sinhvien</p>
-                    <a class="btn btn-accent" href="./catalog.html?resource=sinhvien">Mo danh muc Sinh vien</a>
+                    <a class="btn btn-accent" href="./catalog.html?resource=sinhvien">Mở Danh mục Sinh viên</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Hoc vu</span>
-                    <h4>Nam hoc</h4>
-                    <p>Quan ly nam bat dau, nam ket thuc va ma nam hoc theo chu ky.</p>
+                    <span class="kicker">Học vụ</span>
+                    <h4>Năm học</h4>
+                    <p>Quản lý năm bắt đầu, năm kết thúc và mã năm học theo chu kỳ.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=namhoc</p>
-                    <a class="btn btn-ghost" href="./catalog.html?resource=namhoc">Mo danh muc Nam hoc</a>
+                    <a class="btn btn-ghost" href="./catalog.html?resource=namhoc">Mở Danh mục Năm học</a>
                 </article>
 
                 <article class="catalog-card">
-                    <span class="kicker">Hoc vu</span>
-                    <h4>Hoc ky</h4>
-                    <p>Thiet lap hoc ky theo nam hoc va khoang thoi gian van hanh.</p>
+                    <span class="kicker">Học vụ</span>
+                    <h4>Học kỳ</h4>
+                    <p>Thiết lập học kỳ theo năm học và khoảng thời gian vận hành.</p>
                     <p class="meta-line">URL nhanh: catalog?resource=hocky</p>
-                    <a class="btn btn-ghost" href="./catalog.html?resource=hocky">Mo danh muc Hoc ky</a>
+                    <a class="btn btn-ghost" href="./catalog.html?resource=hocky">Mở Danh mục Học kỳ</a>
                 </article>
             </section>
         </main>
@@ -92,3 +92,5 @@
 </body>
 
 </html>
+
+

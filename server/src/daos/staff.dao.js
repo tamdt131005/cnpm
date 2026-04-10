@@ -52,6 +52,25 @@ class StaffDAO {
         return rows;
     }
 
+    async getFeeRateOptions() {
+        const [monHoc] = await pool.execute(
+            `SELECT maMH, tenMH
+             FROM MONHOC
+             ORDER BY maMH ASC`
+        );
+
+        const [hocKy] = await pool.execute(
+            `SELECT maHocKy, tenHocKy, maNamHoc
+             FROM HOCKY
+             ORDER BY maHocKy DESC`
+        );
+
+        return {
+            monHoc,
+            hocKy
+        };
+    }
+
     async getDebts() {
         const [rows] = await pool.execute(
             `SELECT sv.maSV, sv.hoTen, sv.maLop, hd.maHoaDon, hd.maHocKy, hd.soTienPhaiTra,

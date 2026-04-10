@@ -97,11 +97,12 @@
     class StudentSidebar extends HTMLElement {
         connectedCallback() {
             const path = window.location.pathname;
-        const dashboardSuffix = '/pages/student/overview.html';
+        const overviewSuffix = '/pages/student/overview.html';
+        const dashboardLegacySuffix = '/pages/student/dashboard.html';
         const invoicesSuffix = '/pages/student/invoices.html';
         const registrationsSuffix = '/pages/student/registrations.html';
             const historySuffix = '/pages/student/history.html';
-            const dashboardHref = appPath(dashboardSuffix);
+        const overviewHref = appPath(overviewSuffix);
         const invoicesHref = appPath(invoicesSuffix);
         const registrationsHref = appPath(registrationsSuffix);
             const historyHref = appPath(historySuffix);
@@ -122,7 +123,7 @@
                   </div>
 
                   <nav class="sidebar-nav">
-                    <a class="sidebar-link ${isActive(path, dashboardSuffix) ? 'active' : ''}" href="${dashboardHref}">
+                    <a class="sidebar-link ${isActive(path, overviewSuffix) || isActive(path, dashboardLegacySuffix) ? 'active' : ''}" href="${overviewHref}">
                       <span class="sidebar-link-main">
                         <strong>Tổng quan sinh viên</strong>
                         <small>Hồ sơ học phí và chỉ số cần chú ý</small>
@@ -163,7 +164,7 @@
         connectedCallback() {
             const path = window.location.pathname;
             const ratesSuffix = '/pages/staff/rates.html';
-            const reportSuffix = '/pages/staff/report.html';
+        const reportSuffix = '/pages/staff/report.html';
             const ratesHref = appPath(ratesSuffix);
             const reportHref = appPath(reportSuffix);
 
@@ -194,7 +195,7 @@
                     <a class="sidebar-link ${isActive(path, reportSuffix) ? 'active' : ''}" href="${reportHref}">
                       <span class="sidebar-link-main">
                         <strong>Hóa đơn và báo cáo</strong>
-                        <small>Phát sinh hóa đơn, theo dõi nợ và xuất báo cáo</small>
+                        <small>Phát sinh hóa đơn, theo dõi nợ và tổng hợp báo cáo</small>
                       </span>
                       <span class="sidebar-link-index">02</span>
                     </a>
@@ -210,9 +211,10 @@
         const dashboardSuffix = '/pages/admin/dashboard.html';
         const usersCreateSuffix = '/pages/admin/users-create.html';
         const usersManageSuffix = '/pages/admin/users-manage.html';
+        const usersLegacySuffix = '/pages/admin/users.html';
         const catalogHubSuffix = '/pages/admin/catalog-hub.html';
             const catalogSuffix = '/pages/admin/catalog.html';
-            const reportSuffix = '/pages/staff/report.html';
+            const reportSuffix = '/pages/admin/report.html';
         const dashboardHref = appPath(dashboardSuffix);
         const usersCreateHref = appPath(usersCreateSuffix);
         const usersManageHref = appPath(usersManageSuffix);
@@ -252,7 +254,7 @@
                       <span class="sidebar-link-index">02</span>
                     </a>
 
-                    <a class="sidebar-link ${isActive(path, usersManageSuffix) ? 'active' : ''}" href="${usersManageHref}">
+                    <a class="sidebar-link ${isActive(path, usersManageSuffix) || isActive(path, usersLegacySuffix) ? 'active' : ''}" href="${usersManageHref}">
                       <span class="sidebar-link-main">
                         <strong>Quản lý tài khoản</strong>
                         <small>Sửa thông tin, đổi mật khẩu, khóa/mở khóa</small>
@@ -260,7 +262,7 @@
                       <span class="sidebar-link-index">03</span>
                     </a>
 
-                    <a class="sidebar-link ${isActive(path, catalogHubSuffix) || isActive(path, catalogSuffix) ? 'active' : ''}" href="${catalogHubHref}">
+                    <a class="sidebar-link ${isActive(path, catalogHubSuffix) ? 'active' : ''}" href="${catalogHubHref}">
                       <span class="sidebar-link-main">
                         <strong>Danh mục đào tạo</strong>
                         <small>Tách nhóm danh mục để thao tác nhanh hơn</small>

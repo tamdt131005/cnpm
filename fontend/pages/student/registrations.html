@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mon hoc dang ky</title>
+    <title>Môn học đăng ký</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -17,74 +17,74 @@
         <student-sidebar></student-sidebar>
 
         <main class="content-pane">
-            <app-topbar title="Mon hoc dang ky" subtitle="Loc theo hoc ky de theo doi hoc phi du kien"></app-topbar>
+            <app-topbar title="Môn học đăng ký" subtitle="Loc theo Học kỳ de theo doi Học phí dự kiến"></app-topbar>
 
             <section class="dashboard-toolbar">
-                <p class="breadcrumb">Sinh vien / Mon hoc dang ky</p>
+                <p class="breadcrumb">Sinh viên / Môn học đăng ký</p>
                 <div class="registration-actions">
-                    <a class="btn btn-ghost" href="./overview.html">Tong quan</a>
-                    <a class="btn btn-ghost" href="./invoices.html">Hoa don hoc phi</a>
-                    <a class="btn btn-ghost" href="./history.html">Lich su thanh toan</a>
+                    <a class="btn btn-ghost" href="./overview.html">Tổng quan</a>
+                    <a class="btn btn-ghost" href="./invoices.html">hóa đơn Học phí</a>
+                    <a class="btn btn-ghost" href="./history.html">lịch sử thanh toán</a>
                 </div>
             </section>
 
             <section class="section card">
                 <div class="section-head registration-head">
-                    <h3>Bo loc dang ky</h3>
+                    <h3>Bo loc đăng ký</h3>
                     <div class="registration-tools">
-                        <input id="reg-ma-hoc-ky" class="input" placeholder="Loc ma hoc ky (vi du: HK1_2025)" />
+                        <input id="reg-ma-hoc-ky" class="input" placeholder="Loc Mã Học kỳ (vi du: HK1_2025)" />
                         <select id="reg-loai-sv" class="select">
-                            <option value="ChinhQuy">Chinh quy</option>
-                            <option value="LienThong">Lien thong</option>
-                            <option value="VanBang2">Van bang 2</option>
+                            <option value="ChinhQuy">Chính quy</option>
+                            <option value="LienThong">Liên thông</option>
+                            <option value="VanBang2">Văn bằng 2</option>
                         </select>
-                        <button id="reg-load" class="btn btn-primary" type="button">Tai danh sach</button>
+                        <button id="reg-load" class="btn btn-primary" type="button">Tải danh sách</button>
                     </div>
                 </div>
             </section>
 
             <section class="stat-grid">
                 <article class="stat-card">
-                    <p>Tong mon da dang ky</p>
+                    <p>Tổng mon da đăng ký</p>
                     <h3 id="reg-stat-total-course">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Tong tin chi</p>
+                    <p>Tổng tin chi</p>
                     <h3 id="reg-stat-total-credit">0</h3>
                 </article>
                 <article class="stat-card">
-                    <p>Hoc phi du kien</p>
+                    <p>Học phí dự kiến</p>
                     <h3 id="reg-stat-total-fee">0 VND</h3>
                 </article>
                 <article class="stat-card">
-                    <p>So hoc ky xuat hien</p>
+                    <p>Số Học kỳ xuất hiện</p>
                     <h3 id="reg-stat-semester">0</h3>
                 </article>
             </section>
 
             <section class="section card">
                 <div class="section-head">
-                    <h3>Chi tiet mon hoc da dang ky</h3>
-                    <span class="muted">Du lieu cap nhat theo bo loc hien tai</span>
+                    <h3>chi tiết Môn học da đăng ký</h3>
+                    <span class="muted">dữ liệu Cập nhật theo bo loc hiện tai</span>
                 </div>
 
                 <div class="table-wrap">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Ma dang ky</th>
-                                <th>Ma mon hoc</th>
-                                <th>Ten mon hoc</th>
-                                <th>Hoc ky</th>
+                                <th>Mã đăng ký</th>
+                                <th>Mã Môn học</th>
+                                <th>Tên Môn học</th>
+                                <th>Học kỳ</th>
                                 <th>Tin chi</th>
-                                <th>Gia tin chi</th>
-                                <th>Hoc phi du kien</th>
-                                <th>Trang thai</th>
+                                <th>Giá tin chi</th>
+                                <th>Học phí dự kiến</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody id="registration-body">
                             <tr>
-                                <td colspan="8" class="empty">Dang tai danh sach dang ky...</td>
+                                <td colspan="8" class="empty">Đang tải Danh sách đăng ký...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -100,3 +100,5 @@
 </body>
 
 </html>
+
+
